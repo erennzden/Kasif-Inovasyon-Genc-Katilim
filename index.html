@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genç Katılım — Kuveyt Türk</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #FFFFFF;
+            --deep: #F8FAF9;
+            --forest: #F0F7F5;
+            --kt: #16A086;
+            --ktm: #128B74;
+            --ktl: #1AC0A0;
+            --cream: #0A1A0E;
+            --warm: #1A1A1A;
+            --muted: #5C7063;
+            --gold: #16A086;
+            --goldl: #16A086;
+            --goldx: #128B74;
+            --rule: rgba(22, 160, 134, 0.2);
+            --glass: rgba(0, 0, 0, 0.03);
+            --mono: 'DM Mono', monospace;
+            --serif: 'Cormorant Garamond', serif;
+            --sans: 'DM Sans', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            background: var(--ink);
+            color: var(--cream);
+            font-family: var(--sans);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* ─── CURSOR ─── */
+        #cur {
+            width: 8px;
+            height: 8px;
+            background: var(--kt);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform .15s;
+        }
+
+        #curl {
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(22, 160, 134, .4);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+        }
+
+        body:has(a:hover) #cur,
+        body:has(button:hover) #cur {
+            transform: translate(-50%, -50%) scale(3);
+            background: var(--ktl);
+            opacity: 0.4;
+        }
+
+        /* ─── PROGRESS ─── */
+        #pb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--ktl), var(--kt));
+            z-index: 10000;
+            width: 0;
+        }
+
+        /* ─── NAV DOTS ─── */
+        #nav-dots {
+            position: fixed;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: .9rem;
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, .1);
+            border: 1px solid transparent;
+            cursor: none;
+            transition: all .3s;
+        }
+
+        .dot.active {
+            background: var(--kt);
+            transform: scale(1.5);
+        }
+
+        .dot:hover {
+            background: var(--kt);
+            opacity: .6;
+        }
+
+        /* ─── TOP BAR ─── */
+        #topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.2rem 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, .8);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(22, 160, 134, .1);
+        }
+
+        .tb-brand {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .tb-logo {
+            height: 28px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tb-logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .tb-name {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--cream);
+            letter-spacing: .02em;
+            border-left: 1px solid var(--rule);
+            padding-left: 1.2rem;
+        }
+
+        .tb-name em {
+            font-style: normal;
+            color: var(--kt);
+        }
+
+        .tb-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .tb-tag {
+            font-family: var(--mono);
+            font-size: .62rem;
+            letter-spacing: .18em;
+            color: var(--kt);
+            border: 1px solid rgba(22, 160, 134, .2);
+            padding: .3rem .9rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .tb-team {
+            font-family: var(--mono);
+            font-size: .6rem;
+            color: var(--muted);
+            letter-spacing: .1em;
+        }
+
+        /* ─── SLIDE BASE ─── */
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 3.5rem 4rem;
+        }
+
+        .slide-inner {
+            max-width: 1100px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ─── SLIDE NUMBERS ─── */
+        .slide-num {
+            font-family: var(--mono);
+            font-size: .6rem;
+            color: var(--kt);
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            opacity: 0.5;
+        }
+
+        .slide-num::after {
+            content: '';
+            flex: 1;
+            max-width: 50px;
+            height: 1px;
+            background: var(--rule);
+        }
+
+        /* ─── RULE LINE ─── */
+        .rule {
+            width: 60px;
+            height: 1px;
+            background: var(--kt);
+            margin-bottom: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .rule.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ─── GRAIN OVERLAY ─── */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9990;
+            pointer-events: none;
+            opacity: .025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* ════════════════════════════
+   SLIDE 1 — HERO
+════════════════════════════ */
+        #s1 {
+            background: var(--ink);
+            text-align: center;
+            padding: 6rem 3.5rem;
+        }
+
+        #s1 .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(120px);
+        }
+
+        .bc1 {
+            width: 700px;
+            height: 700px;
+            background: rgba(22, 160, 134, .08);
+            top: -20%;
+            left: -15%;
+            animation: bf 12s ease-in-out infinite;
+        }
+
+        .bc2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(22, 160, 134, .04);
+            bottom: -10%;
+            right: -5%;
+            animation: bf 10s 4s ease-in-out infinite;
+        }
+
+        @keyframes bf {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1)
+            }
+
+            50% {
+                transform: translate(20px, -20px) scale(1.05)
+            }
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .7rem;
+            font-family: var(--mono);
+            font-size: .65rem;
+            letter-spacing: .2em;
+            color: var(--kt);
+            border: 1px solid rgba(22, 160, 134, .2);
+            border-radius: 2px;
+            padding: .35rem 1rem;
+            margin-bottom: 3rem;
+            animation: fadeUp .8s ease both;
+            text-transform: uppercase;
+        }
+
+        .dot-live {
+            width: 5px;
+            height: 5px;
+            background: var(--ktl);
+            border-radius: 50%;
+            animation: live 2s infinite;
+        }
+
+        @keyframes live {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-weight: 300;
+            font-size: clamp(3rem, 7.5vw, 7.5rem);
+            line-height: 1;
+            letter-spacing: -.02em;
+            margin-bottom: 2rem;
+            animation: fadeUp .9s .15s ease both;
+        }
+
+        .hero-title .l1 {
+            display: block;
+            color: var(--cream);
+        }
+
+        .hero-title .l2 {
+            display: block;
+            color: var(--kt);
+            font-style: italic;
+        }
+
+        .hero-title .l3 {
+            display: block;
+            color: var(--kt);
+            font-size: .5em;
+            letter-spacing: .2em;
+            font-style: normal;
+            font-family: var(--mono);
+            margin-top: .5rem;
+            opacity: 0.6;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--muted);
+            max-width: 520px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeUp .9s .3s ease both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp .9s .45s ease both;
+        }
+
+        .btn-g {
+            padding: .8rem 2rem;
+            background: var(--kt);
+            color: #fff;
+            font-weight: 500;
+            font-size: .82rem;
+            border-radius: 2px;
+            border: none;
+            cursor: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            letter-spacing: .04em;
+            transition: background .2s, transform .2s;
+            border: 1px solid rgba(0, 122, 67, .5);
+        }
+
+        .btn-g:hover {
+            background: var(--ktm);
+            transform: translateY(-1px);
+        }
+
+        .btn-gold {
+            padding: .8rem 2rem;
+            background: transparent;
+            color: var(--kt);
+            font-weight: 500;
+            font-size: .82rem;
+            border-radius: 2px;
+            cursor: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            letter-spacing: .04em;
+            transition: background .2s;
+            border: 1px solid rgba(22, 160, 134, .3);
+        }
+
+        .btn-gold:hover {
+            background: rgba(22, 160, 134, .05);
+        }
+
+        /* ════════════════════════════
+   SLIDE 2 — MARKET DATA
+════════════════════════════ */
+        #s2 {
+            background: var(--deep);
+        }
+
+        .big-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid rgba(22, 160, 134, .1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 2.5rem;
+        }
+
+        .bstat {
+            padding: 3rem 2.5rem;
+            border-right: 1px solid rgba(22, 160, 134, .1);
+            border-bottom: 1px solid rgba(22, 160, 134, .1);
+            position: relative;
+            transition: background .3s;
+        }
+
+        .bstat:hover {
+            background: rgba(255, 255, 255, .02);
+        }
+
+        .bstat:nth-child(2n) {
+            border-right: none;
+        }
+
+        .bstat:nth-child(3),
+        .bstat:nth-child(4) {
+            border-bottom: none;
+        }
+
+        .bstat-n {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: .6rem;
+            display: block;
+        }
+
+        .bstat-n.g {
+            color: var(--ktl);
+        }
+
+        .bstat-n.gold {
+            color: var(--goldx);
+        }
+
+        .bstat-n.w {
+            color: var(--cream);
+        }
+
+        .bstat-lbl {
+            font-size: .88rem;
+            color: var(--muted);
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        .bstat-src {
+            position: absolute;
+            bottom: 1rem;
+            left: 2.5rem;
+            font-family: var(--mono);
+            font-size: .55rem;
+            color: rgba(22, 160, 134, .4);
+            letter-spacing: .06em;
+        }
+
+        /* ════════════════════════════
+   SLIDE 3 — PROBLEM
+════════════════════════════ */
+        #s3 {
+            background: var(--ink);
+        }
+
+        .prob-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-top: 2.5rem;
+        }
+
+        .prob-quote {
+            position: relative;
+            padding: 2.5rem;
+            background: rgba(22, 160, 134, .02);
+            border: 1px solid rgba(22, 160, 134, .15);
+            border-radius: 4px;
+        }
+
+        .prob-quote::before {
+            content: '"';
+            font-family: var(--serif);
+            font-size: 8rem;
+            color: rgba(22, 160, 134, .1);
+            position: absolute;
+            top: -2rem;
+            left: 1.5rem;
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .quote-src {
+            font-family: var(--mono);
+            font-size: .58rem;
+            color: var(--kt);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .pain-stack {
+            display: flex;
+            flex-direction: column;
+            gap: .8rem;
+        }
+
+        .pain {
+            display: flex;
+            gap: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 3px;
+            background: rgba(255, 255, 255, .02);
+            transition: border-color .3s, transform .25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pain::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--kt);
+        }
+
+        .pain:hover {
+            border-color: rgba(0, 163, 85, .25);
+            transform: translateX(4px);
+        }
+
+        .pain-ic {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: .1rem;
+        }
+
+        .pain-t {
+            font-size: .88rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: .2rem;
+        }
+
+        .pain-d {
+            font-size: .78rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .pain-data {
+            font-family: var(--mono);
+            font-size: .56rem;
+            color: rgba(0, 163, 85, .6);
+            margin-top: .35rem;
+            letter-spacing: .05em;
+        }
+
+        /* ════════════════════════════
+   SLIDE 4 — SOLUTION
+════════════════════════════ */
+        #s4 {
+            background: var(--deep);
+        }
+
+        .sol-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: rgba(22, 160, 134, .1);
+            border: 1px solid rgba(22, 160, 134, .1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 2.5rem;
+        }
+
+        .sol-card {
+            background: var(--deep);
+            padding: 2rem 1.8rem;
+            transition: background .25s;
+            position: relative;
+        }
+
+        .sol-card:hover {
+            background: rgba(0, 92, 50, .08);
+        }
+
+        .sol-card.span2 {
+            grid-column: span 2;
+        }
+
+        .sol-ic {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .sol-t {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: .5rem;
+        }
+
+        .sol-d {
+            font-size: .79rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .sol-tag {
+            display: inline-block;
+            margin-top: .8rem;
+            font-family: var(--mono);
+            font-size: .56rem;
+            letter-spacing: .15em;
+            color: var(--kt);
+            border: 1px solid rgba(22, 160, 134, .2);
+            padding: .15rem .5rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .sol-tag.g {
+            color: var(--ktl);
+            border-color: rgba(0, 163, 85, .2);
+        }
+
+        .sol-exists {
+            font-family: var(--mono);
+            font-size: .56rem;
+            color: rgba(0, 163, 85, .5);
+            margin-top: .5rem;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        .sol-exists::before {
+            content: '✓ MEVCUT:';
+        }
+
+        /* ════════════════════════════
+   SLIDE 5 — STRATEGIC FIT
+════════════════════════════ */
+        #s5 {
+            background: var(--forest);
+        }
+
+        .sf-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 2.5rem;
+        }
+
+        .sf-left {}
+
+        .sf-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .sf-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            background: rgba(0, 0, 0, .2);
+            border: 1px solid rgba(0, 163, 85, .12);
+            border-radius: 3px;
+            transition: border-color .3s;
+        }
+
+        .sf-item:hover {
+            border-color: rgba(0, 163, 85, .3);
+        }
+
+        .sf-num {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: rgba(0, 163, 85, .3);
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .sf-t {
+            font-size: .86rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: .2rem;
+        }
+
+        .sf-d {
+            font-size: .78rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .sf-right {}
+
+        .kt-box-big {
+            background: rgba(22, 160, 134, .03);
+            border: 1px solid rgba(22, 160, 134, .2);
+            border-radius: 4px;
+            padding: 2rem;
+        }
+
+        .kt-box-title {
+            font-family: var(--serif);
+            font-size: 1rem;
+            color: var(--kt);
+            margin-bottom: 1.2rem;
+            font-style: italic;
+        }
+
+        .kt-fact {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .7rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+        }
+
+        .kt-fact:last-child {
+            border-bottom: none;
+        }
+
+        .kt-fact-lbl {
+            font-size: .78rem;
+            color: var(--muted);
+        }
+
+        .kt-fact-val {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            color: var(--cream);
+            font-weight: 500;
+        }
+
+        .kt-fact-val.g {
+            color: var(--ktl);
+        }
+
+        .kt-fact-val.gold {
+            color: var(--kt);
+        }
+
+        .kt-src {
+            font-family: var(--mono);
+            font-size: .55rem;
+            color: rgba(22, 160, 134, .35);
+            text-align: right;
+            margin-top: 1rem;
+            letter-spacing: .05em;
+        }
+
+        /* ════════════════════════════
+   SLIDE 6 — INNOVATION DVF
+════════════════════════════ */
+        #s6 {
+            background: var(--ink);
+        }
+
+        .dvf-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 2.5rem;
+        }
+
+        .dvf-left {}
+
+        .dvf-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .dvf-c {
+            padding: 1.5rem;
+            background: rgba(22, 160, 134, .02);
+            border: 1px solid rgba(22, 160, 134, .12);
+            border-radius: 3px;
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            transition: border-color .3s;
+        }
+
+        .dvf-c:hover {
+            border-color: rgba(0, 163, 85, .2);
+        }
+
+        .dvf-score {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1;
+            flex-shrink: 0;
+            width: 60px;
+            text-align: center;
+        }
+
+        .dvf-score.g {
+            color: var(--ktl);
+        }
+
+        .dvf-score.gold {
+            color: var(--kt);
+        }
+
+        .dvf-score.w {
+            color: var(--cream);
+        }
+
+        .dvf-c-title {
+            font-family: var(--serif);
+            font-size: .95rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: .3rem;
+        }
+
+        .dvf-c-desc {
+            font-size: .76rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .dvf-c-note {
+            font-family: var(--mono);
+            font-size: .54rem;
+            color: rgba(22, 160, 134, .4);
+            margin-top: .5rem;
+            letter-spacing: .05em;
+        }
+
+        .scamper-right {}
+
+        .sc-title {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            color: var(--kt);
+            font-style: italic;
+            margin-bottom: 1.2rem;
+        }
+
+        .sc-items {
+            display: flex;
+            flex-direction: column;
+            gap: .7rem;
+        }
+
+        .sc-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid rgba(255, 255, 255, .05);
+            border-radius: 3px;
+            transition: border-color .3s;
+        }
+
+        .sc-item:hover {
+            border-color: rgba(0, 163, 85, .2);
+        }
+
+        .sc-letter {
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 92, 50, .25);
+            border: 1px solid rgba(0, 163, 85, .2);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--ktl);
+            flex-shrink: 0;
+        }
+
+        .sc-t {
+            font-size: .82rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: .15rem;
+        }
+
+        .sc-d {
+            font-size: .74rem;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .disclaimer-box {
+            margin-top: 1.5rem;
+            padding: .8rem 1rem;
+            background: rgba(22, 160, 134, .04);
+            border: 1px solid rgba(22, 160, 134, .15);
+            border-radius: 3px;
+            font-family: var(--mono);
+            font-size: .58rem;
+            color: rgba(22, 160, 134, .5);
+            letter-spacing: .05em;
+            line-height: 1.7;
+        }
+
+        /* ════════════════════════════
+   SLIDE 7 — BUSINESS CASE
+════════════════════════════ */
+        #s7 {
+            background: var(--deep);
+        }
+
+        .biz-top {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: rgba(22, 160, 134, .1);
+            border: 1px solid rgba(22, 160, 134, .1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 2.5rem;
+        }
+
+        .biz-card {
+            background: var(--deep);
+            padding: 2.2rem 2rem;
+            position: relative;
+            transition: background .25s;
+        }
+
+        .biz-card:hover {
+            background: rgba(0, 92, 50, .06);
+        }
+
+        .biz-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+        }
+
+        .biz-card:nth-child(1)::after {
+            background: linear-gradient(90deg, var(--ktl), transparent);
+        }
+
+        .biz-card:nth-child(2)::after {
+            background: linear-gradient(90deg, var(--goldl), transparent);
+        }
+
+        .biz-card:nth-child(3)::after {
+            background: linear-gradient(90deg, var(--cream), transparent);
+            opacity: .3;
+        }
+
+        .biz-badge {
+            font-family: var(--mono);
+            font-size: .6rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: .25rem .7rem;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .biz-badge.g {
+            color: var(--ktl);
+            background: rgba(0, 92, 50, .2);
+            border: 1px solid rgba(0, 163, 85, .2);
+        }
+
+        .biz-badge.gold {
+            color: var(--kt);
+            background: rgba(22, 160, 134, .08);
+            border: 1px solid rgba(22, 160, 134, .2);
+        }
+
+        .biz-badge.w {
+            color: var(--cream);
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            opacity: .7;
+        }
+
+        .biz-t {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: .6rem;
+        }
+
+        .biz-d {
+            font-size: .78rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .biz-val {
+            font-family: var(--serif);
+            font-size: 2.6rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: flex;
+            align-items: baseline;
+            gap: .3rem;
+        }
+
+        .biz-val.g {
+            color: var(--ktl);
+        }
+
+        .biz-val.gold {
+            color: var(--kt);
+        }
+
+        .biz-val.w {
+            color: rgba(0, 0, 0, .4);
+        }
+
+        .biz-val small {
+            font-size: .8rem;
+            color: var(--muted);
+            font-family: var(--sans);
+            font-weight: 300;
+        }
+
+        .biz-src {
+            font-family: var(--mono);
+            font-size: .54rem;
+            color: rgba(184, 144, 42, .35);
+            margin-top: .7rem;
+            letter-spacing: .04em;
+        }
+
+        .ltv-section {
+            margin-top: 2.5rem;
+            padding: 1.8rem 2rem;
+            background: rgba(0, 0, 0, .2);
+            border: 1px solid rgba(184, 144, 42, .12);
+            border-radius: 3px;
+        }
+
+        .ltv-label {
+            font-family: var(--mono);
+            font-size: .62rem;
+            color: var(--muted);
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .ltv-bar-wrap {
+            display: flex;
+            gap: 2px;
+            height: 8px;
+            border-radius: 1px;
+            overflow: hidden;
+            margin-bottom: .8rem;
+        }
+
+        .ltv-seg {
+            height: 100%;
+        }
+
+        .ltv-s1 {
+            background: var(--ktl);
+            flex: 4;
+        }
+
+        .ltv-s2 {
+            background: var(--goldl);
+            flex: 8;
+        }
+
+        .ltv-s3 {
+            background: rgba(255, 255, 255, .25);
+            flex: 18;
+        }
+
+        .ltv-legend {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .ltv-leg {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .71rem;
+            color: var(--muted);
+        }
+
+        .ltv-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .ltv-dot.g {
+            background: var(--ktl);
+        }
+
+        .ltv-dot.gold {
+            background: var(--kt);
+        }
+
+        .ltv-dot.w {
+            background: rgba(0, 0, 0, .1);
+        }
+
+        .ltv-note {
+            font-family: var(--mono);
+            font-size: .54rem;
+            color: rgba(22, 160, 134, .35);
+            margin-top: .7rem;
+            letter-spacing: .04em;
+        }
+
+        /* ════════════════════════════
+   SLIDE 8 — CLOSE
+════════════════════════════ */
+        #s8 {
+            background: var(--ink);
+            text-align: center;
+        }
+
+        .close-title {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 6vw, 6rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -.02em;
+            margin-bottom: 2rem;
+            color: var(--cream);
+        }
+
+        .close-title em {
+            font-style: italic;
+            color: var(--ktl);
+        }
+
+        .close-title .gold {
+            color: var(--kt);
+        }
+
+        .close-sub {
+            font-size: .95rem;
+            font-weight: 300;
+            color: var(--muted);
+            max-width: 480px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .team-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 3rem;
+            padding: 1rem 2rem;
+            background: rgba(22, 160, 134, .04);
+            border: 1px solid rgba(22, 160, 134, .2);
+            border-radius: 3px;
+        }
+
+        .team-card-lbl {
+            text-align: left;
+        }
+
+        .team-card-t {
+            font-family: var(--serif);
+            font-size: .95rem;
+            color: var(--cream);
+        }
+
+        .team-card-s {
+            font-family: var(--mono);
+            font-size: .55rem;
+            color: var(--muted);
+            letter-spacing: .1em;
+            margin-top: .2rem;
+        }
+
+        .sources-footer {
+            margin-top: 4rem;
+            padding: 1.5rem 2rem;
+            background: rgba(0, 0, 0, .25);
+            border: 1px solid rgba(255, 255, 255, .05);
+            border-radius: 3px;
+            text-align: left;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sf-title {
+            font-family: var(--mono);
+            font-size: .6rem;
+            color: var(--kt);
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-bottom: .8rem;
+        }
+
+        .sf-list2 {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+
+        .sf-item2 {
+            font-family: var(--mono);
+            font-size: .56rem;
+            color: var(--muted);
+            letter-spacing: .04em;
+            display: flex;
+            gap: .6rem;
+        }
+
+        .sf-item2::before {
+            content: '—';
+            color: rgba(22, 160, 134, .4);
+            flex-shrink: 0;
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.vis {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--ink);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(184, 144, 42, .3);
+            border-radius: 2px;
+        }
+
+        @media (max-width:900px) {
+            #nav-dots {
+                display: none;
+            }
+
+            #topbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .tb-right {
+                display: none;
+            }
+
+            .slide {
+                padding: 5rem 1.5rem 3rem;
+                scroll-snap-align: none;
+            }
+
+            html {
+                scroll-snap-type: none;
+            }
+
+            .big-stats,
+            .prob-layout,
+            .sf-grid,
+            .dvf-layout,
+            .biz-top,
+            .sol-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sol-grid .span2 {
+                grid-column: span 1;
+            }
+
+            .bstat:nth-child(n) {
+                border-right: 1px solid rgba(184, 144, 42, .1);
+                border-bottom: 1px solid rgba(184, 144, 42, .1);
+            }
+
+            .ltv-legend {
+                flex-direction: column;
+                gap: .4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="pb"></div>
+    <div id="cur"></div>
+    <div id="curl"></div>
+
+    <div id="nav-dots">
+        <div class="dot active" data-s="s1" title="Giriş"></div>
+        <div class="dot" data-s="s2" title="Pazar Verileri"></div>
+        <div class="dot" data-s="s3" title="Problem"></div>
+        <div class="dot" data-s="s4" title="Çözüm"></div>
+        <div class="dot" data-s="s5" title="Stratejik Uyum"></div>
+        <div class="dot" data-s="s6" title="İnovasyon"></div>
+        <div class="dot" data-s="s7" title="Ticari Değer"></div>
+        <div class="dot" data-s="s8" title="Kapanış"></div>
+    </div>
+
+    <div id="topbar">
+        <div class="tb-brand">
+            <div class="tb-logo">
+                <img src="https://www.kuveytturk.com.tr/_assets/svg/logo.svg" alt="Kuveyt Türk Logo">
+            </div>
+            <div class="tb-name">Üniversite Yaşam <em>İşletim Sistemi</em></div>
+        </div>
+        <div class="tb-right">
+            <span class="tb-tag">Kaşif Kampı 2026</span>
+            <span class="tb-team">ÖNCÜ EKİBİ</span>
+        </div>
+    </div>
+
+    <!-- ══ S1 HERO ══ -->
+    <section class="slide" id="s1">
+        <div class="bg-circle bc1"></div>
+        <div class="bg-circle bc2"></div>
+        <div class="slide-inner" style="text-align:center">
+            <div class="hero-eyebrow">
+                <div class="dot-live"></div>Kuveyt Türk — Genç Katılım Projesi
+            </div>
+            <h1 class="hero-title">
+                <span class="l1">Genç</span>
+                <span class="l2">Katılım</span>
+                <span class="l3">Kaşif İnovasyon Kampı &nbsp;·&nbsp; ÖNCÜ Ekibi &nbsp;·</span>
+            </h1>
+            <p class="hero-sub">Sağlam Kart Kampüs'ü bir ödeme aracından gençlerin hayatının tam merkezine oturan bir
+                <strong style="color:var(--cream);font-weight:500">Yaşam Asistanına</strong> dönüştürme önerisi.
+            </p>
+            <div class="hero-cta">
+                <a href="#s2" class="btn-g">Veriye Bak ↓</a>
+                <a href="#s4" class="btn-gold">Çözüme Atla →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S2 MARKET DATA ══ -->
+    <section class="slide" id="s2">
+        <div class="slide-inner">
+            <div class="slide-num">02 — Pazar Fırsatı</div>
+            <div class="rule"></div>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
+                Rakamlar <em style="font-style:italic;color:var(--ktl)">fırsatı</em> gösteriyor
+            </h2>
+            <p style="font-size:.9rem;color:var(--muted);margin-top:.8rem;line-height:1.7;" class="reveal">Tüm veriler
+                kamuya açık kaynaklardan alınmıştır.</p>
+            <div class="big-stats reveal">
+                <div class="bstat">
+                    <span class="bstat-n g" data-t="7" data-s=",08M">0</span>
+                    <div class="bstat-lbl">Türkiye'de yükseköğrenimdeki toplam öğrenci sayısı — projenin doğrudan hedef
+                        kitlesi</div>
+                    <div class="bstat-src">YÖK Yükseköğretim Bilgi Yönetim Sistemi, 2023-2024</div>
+                </div>
+                <div class="bstat">
+                    <span class="bstat-n gold" data-t="95" data-s="%">0</span>
+                    <div class="bstat-lbl">Gençlerin banka hesabı sahibi olma oranı — ancak aktif kullananlar <strong
+                            style="color:var(--cream)">%50'nin altında</strong></div>
+                    <div class="bstat-src">Garanti BBVA / TBV Be Node Araştırması, 2025</div>
+                </div>
+                <div class="bstat">
+                    <span class="bstat-n w" data-t="84" data-s="%">0</span>
+                    <div class="bstat-lbl">Gençlerin tüm bankacılık işlemlerini <strong
+                            style="color:var(--cream)">yalnızca mobil</strong> üzerinden yapma oranı</div>
+                    <div class="bstat-src">Garanti BBVA / TBV Be Node Araştırması, 2025</div>
+                </div>
+                <div class="bstat">
+                    <span class="bstat-n g" data-t="900" data-s="K+">0</span>
+                    <div class="bstat-lbl">Her yıl iş hayatına katılan yeni mezun sayısı — müşteri yolculuğunun kritik
+                        başlangıç noktası</div>
+                    <div class="bstat-src">YÖK Yükseköğretim Mezuniyet İstatistikleri, 2022-2023</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S3 PROBLEM ══ -->
+    <section class="slide" id="s3">
+        <div class="slide-inner">
+            <div class="slide-num">03 — Problem</div>
+            <div class="rule"></div>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
+                Hesap var, <em style="font-style:italic;color:var(--goldl)">ilişki yok</em>
+            </h2>
+            <div class="prob-layout">
+                <div class="prob-quote reveal">
+                    <p class="quote-text">Bankacılık gençler için soğuk, uzak ve sıkıcı bir hizmet olarak algılanıyor.
+                    </p>
+                    <div class="quote-src">Garanti BBVA / TBV Be Node Araştırması — Gençlik Bankacılığı, 2025</div>
+                </div>
+                <div class="pain-stack reveal">
+                    <div class="pain">
+                        <div class="pain-ic">📱</div>
+                        <div>
+                            <div class="pain-t">Aktif Kullanım Uçurumu</div>
+                            <div class="pain-d">Hesap var ama kullanılmıyor. Hesabı olan gençlerin yarısından fazlası
+                                bankacılığını aktif sürdürmüyor.</div>
+                            <div class="pain-data">Kaynak: Garanti BBVA / Be Node 2025 — %95 hesap sahibi, &lt;%50 aktif
+                                kullanım</div>
+                        </div>
+                    </div>
+                    <div class="pain">
+                        <div class="pain-ic">💳</div>
+                        <div>
+                            <div class="pain-t">Çoklu Kart Yükü</div>
+                            <div class="pain-d">Banka kartı, öğrenci kimliği ve ulaşım kartı ayrı ayrı taşınıyor, ayrı
+                                bakiye yükleniyor. Sürtünme yüksek.</div>
+                        </div>
+                    </div>
+                    <div class="pain">
+                        <div class="pain-ic">🔗</div>
+                        <div>
+                            <div class="pain-t">Ekosistem Yokluğu</div>
+                            <div class="pain-d">Mevcut bankacılık ürünleri staj, kulüp, kariyer ve sosyal yaşama
+                                dokunmuyor. Banka gencin yaşamının dışında kalıyor.</div>
+                        </div>
+                    </div>
+                    <div class="pain">
+                        <div class="pain-ic">⏰</div>
+                        <div>
+                            <div class="pain-t">Kaçan Sadakat Penceresi</div>
+                            <div class="pain-d">Her yıl 900.000+ mezun iş hayatına atılıyor. Üniversitede ilişki
+                                kurulmazsa bu müşteriler rakip bankalara kayıyor.</div>
+                            <div class="pain-data">Kaynak: YÖK Mezuniyet İstatistikleri 2022-23</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S4 SOLUTION ══ -->
+    <section class="slide" id="s4">
+        <div class="slide-inner">
+            <div class="slide-num">04 — Çözüm</div>
+            <div class="rule"></div>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
+                Sağlam Kart Kampüs → <em style="font-style:italic;color:var(--ktl)">Yaşam Asistanı</em>
+            </h2>
+            <p style="font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.7;max-width:560px;"
+                class="reveal">Mevcut Kampüs programının üzerine inşa edilen 5 yeni katman. Sıfırdan başlamıyoruz —
+                genişletiyoruz.</p>
+            <div class="sol-grid reveal">
+                <div class="sol-card">
+                    <span class="sol-ic">🚌</span>
+                    <div class="sol-t">Bütünleşik Ulaşım</div>
+                    <div class="sol-d">Sağlam Kart Kampüs'ün şehir içi ulaşım sistemleriyle entegrasyonu. Tek kart, tüm
+                        şehir.</div>
+                    <div class="sol-tag">Entegrasyon</div>
+                </div>
+                <div class="sol-card">
+                    <span class="sol-ic">💰</span>
+                    <div class="sol-t">Genişletilmiş Cashback</div>
+                    <div class="sol-d">Mevcut %10 pazar/restoran indirimi ve altın puanın Spotify, Netflix gibi dijital
+                        platformlara yayılması.</div>
+                    <div class="sol-tag g">Mevcut altyapı üzerine</div>
+                    <div class="sol-exists">Sağlam Kart Kampüs altın puan sistemi</div>
+                </div>
+                <div class="sol-card">
+                    <span class="sol-ic">🏆</span>
+                    <div class="sol-t">KT-Kampüs Ligi</div>
+                    <div class="sol-d">Harcama ve finansal eğitimden puan kazan, sıralamada yüksel, teknolojik ödüller
+                        kazan. Mevcut "Arkadaşını Getir" mantığının oyunlaştırılmış evrimi.</div>
+                    <div class="sol-tag">Gamification</div>
+                    <div class="sol-exists">Arkadaşını Getir kampanyası</div>
+                </div>
+                <div class="sol-card span2">
+                    <span class="sol-ic">🎯</span>
+                    <div class="sol-t">Kariyer & Gelişim Merkezi</div>
+                    <div class="sol-d">Sertifikalı finansal eğitim entegrasyonu + staj başvurularının tek merkezden
+                        yönetimi. Kuveyt Türk'ün "Kaşif" inovasyon programı ve girişimcilik ekosistemiyle doğrudan
+                        sinerji. Gençler bankayı kariyer kapısı olarak görür.</div>
+                    <div class="sol-tag">Kariyer</div>
+                    <div class="sol-exists">Kaşif İnovasyon Kampı & Girişimci Kaşif programları</div>
+                </div>
+                <div class="sol-card">
+                    <span class="sol-ic">🎪</span>
+                    <div class="sol-t">Kulüp & Sponsorluk Portalı</div>
+                    <div class="sol-d">Öğrenci kulüplerinin sponsorluk ve etkinlik taleplerini dijital portal üzerinden
+                        iletebileceği altyapı. KT'nin kurumsal sosyal sorumluluk bütçesini doğrudan öğrencilere
+                        ulaştırır.</div>
+                    <div class="sol-tag">Topluluk</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S5 STRATEGIC FIT ══ -->
+    <section class="slide" id="s5">
+        <div class="slide-inner">
+            <div class="slide-num">05 — Neden KT, Neden Şimdi?</div>
+            <div class="rule"></div>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
+                Altyapı <em style="font-style:italic;color:var(--ktl)">hazır</em>, adım tek
+            </h2>
+            <div class="sf-grid">
+                <div class="sf-left reveal">
+                    <p style="font-size:.86rem;color:var(--muted);line-height:1.7;max-width:400px;">Bu proje sıfırdan
+                        bir ürün geliştirme değil. Kuveyt Türk'ün mevcut varlıklarını birbirine bağlayarak değer üretme
+                        önerisidir.</p>
+                    <div class="sf-list">
+                        <div class="sf-item">
+                            <div class="sf-num">01</div>
+                            <div>
+                                <div class="sf-t">Kampüs programı zaten kurulu</div>
+                                <div class="sf-d">Sağlam Kart Kampüs, 18-25 yaş üniversite öğrencilerine özel olarak
+                                    aktif şekilde sunulmakta. Ekosistem genişlemesi mevcut ürün üzerine inşa edilir.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sf-item">
+                            <div class="sf-num">02</div>
+                            <div>
+                                <div class="sf-t">Dijital altyapı güçlü</div>
+                                <div class="sf-d">Kuveyt Türk Mobil uygulaması ve dijital bankacılık kanalları
+                                    entegrasyon için teknik zemin sağlıyor. 2023 yılında aktif dijital bankacılık
+                                    müşteri sayısı rekor düzeyde arttı.</div>
+                            </div>
+                        </div>
+                        <div class="sf-item">
+                            <div class="sf-num">03</div>
+                            <div>
+                                <div class="sf-t">İnovasyon kültürü yerleşik</div>
+                                <div class="sf-d">Kaşif İnovasyon Kampı, Girişimci Kaşif programı ve KT'nin fintech iş
+                                    birliği deneyimi bu projeyi organik olarak destekliyor.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sf-right reveal">
+                    <div class="kt-box-big">
+                        <div class="kt-box-title">Kuveyt Türk — Güncel Veriler</div>
+                        <div class="kt-fact">
+                            <span class="kt-fact-lbl">Yurtiçi Şube Sayısı</span>
+                            <span class="kt-fact-val g">447</span>
+                        </div>
+                        <div class="kt-fact">
+                            <span class="kt-fact-lbl">Hedef Yaş Grubu (Kampüs)</span>
+                            <span class="kt-fact-val">18 – 25</span>
+                        </div>
+                        <div class="kt-fact">
+                            <span class="kt-fact-lbl">Kampüs Kaydı</span>
+                            <span class="kt-fact-val g">Mobil üzerinden anında</span>
+                        </div>
+                        <div class="kt-fact">
+                            <span class="kt-fact-lbl">Mevcut Kampüs avantajı</span>
+                            <span class="kt-fact-val gold">%10 indirim + Altın Puan</span>
+                        </div>
+                        <div class="kt-fact">
+                            <span class="kt-fact-lbl">Hedef piyasa büyüklüğü</span>
+                            <span class="kt-fact-val g">7,08M öğrenci</span>
+                        </div>
+                        <div class="kt-src">Kaynak: Kuveyt Türk 2024 faaliyet verisi & YÖK 2023-24</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S6 INNOVATION ══ -->
+    <section class="slide" id="s6">
+        <div class="slide-inner">
+            <div class="slide-num">06 — İnovasyon Analizi</div>
+            <div class="rule"></div>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
+                DVF &amp; <em style="font-style:italic;color:var(--goldl)">SCAMPER</em>
+            </h2>
+            <div class="dvf-layout">
+                <div class="dvf-left reveal">
+                    <p style="font-size:.8rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6;">DVF değerlemesi
+                        ekip analizi olup piyasa araştırmaları ve kamuya açık verilerle desteklenmiştir.</p>
+                    <div class="dvf-cards">
+                        <div class="dvf-c">
+                            <div class="dvf-score g">D</div>
+                            <div>
+                                <div class="dvf-c-title">Arzulanabilirlik (Desirability)</div>
+                                <div class="dvf-c-desc">Gençlerin %84'ü zaten mobil-only bankacılık kullanıyor. Tek
+                                    kartla tüm hayatı yönetme ihtiyacı somut ve araştırmalarla desteklenmiş.</div>
+                                <div class="dvf-c-note">Dayandığı veri: Garanti BBVA / Be Node 2025 — %84 mobil
+                                    kullanım, &lt;%50 aktif kullanım çelişkisi</div>
+                            </div>
+                        </div>
+                        <div class="dvf-c">
+                            <div class="dvf-score gold">F</div>
+                            <div>
+                                <div class="dvf-c-title">Uygulanabilirlik (Feasibility)</div>
+                                <div class="dvf-c-desc">Kampüs programı mevcut, 447 şube ve güçlü dijital altyapı hazır.
+                                    Sıfırdan ürün geliştirme değil, ekosistem genişlemesi.</div>
+                                <div class="dvf-c-note">Dayandığı veri: KT 2024 faaliyet raporu — şube, mobil altyapı,
+                                    Kaşif programı</div>
+                            </div>
+                        </div>
+                        <div class="dvf-c">
+                            <div class="dvf-score w">V</div>
+                            <div>
+                                <div class="dvf-c-title">Sürdürülebilirlik (Viability)</div>
+                                <div class="dvf-c-desc">Her yıl 900.000+ mezun iş hayatına giriyor. Üniversitede kurulan
+                                    ilişki, mezuniyet sonrası maaş ve yatırım müşterisine dönüşüyor.</div>
+                                <div class="dvf-c-note">Dayandığı veri: YÖK mezuniyet istatistikleri 2022-23 — 903.673
+                                    mezun</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disclaimer-box">
+                        NOT: DVF değerlendirmesi ekip analizi niteliğindedir. Sayısal puan verilmemiştir; güçlü / orta /
+                        zayıf yerine piyasa verisiyle desteklenen gerekçeler sunulmuştur.
+                    </div>
+                </div>
+                <div class="scamper-right reveal">
+                    <div class="sc-title">SCAMPER Yaklaşımı</div>
+                    <div class="sc-items">
+                        <div class="sc-item">
+                            <div class="sc-letter">S</div>
+                            <div>
+                                <div class="sc-t">Substitute — Dönüştür</div>
+                                <div class="sc-d">Geleneksel bankacılık süreçlerini staj ve sponsorluk portallarına
+                                    dönüştür. Şube yerine platform.</div>
+                            </div>
+                        </div>
+                        <div class="sc-item">
+                            <div class="sc-letter">C</div>
+                            <div>
+                                <div class="sc-t">Combine — Birleştir</div>
+                                <div class="sc-d">Ulaşım, kariyer ve sosyal platformları mevcut Kampüs altyapısıyla tek
+                                    ekosistemde birleştir.</div>
+                            </div>
+                        </div>
+                        <div class="sc-item">
+                            <div class="sc-letter">A</div>
+                            <div>
+                                <div class="sc-t">Adapt — Uyarla</div>
+                                <div class="sc-d">Oyun mekaniği (puan, sıralama, ödül) mevcut altın puan sistemine
+                                    uyarlanır.</div>
+                            </div>
+                        </div>
+                        <div class="sc-item">
+                            <div class="sc-letter">M</div>
+                            <div>
+                                <div class="sc-t">Modify — Güçlendir</div>
+                                <div class="sc-d">Mevcut "%10 indirim" vaadini dijital platformlara ve kariyer
+                                    hizmetlerine genişlet.</div>
+                            </div>
+                        </div>
+                        <div class="sc-item">
+                            <div class="sc-letter">E</div>
+                            <div>
+                                <div class="sc-t">Eliminate — Kaldır</div>
+                                <div class="sc-d">Çoklu kart zorunluluğunu ve ayrı bakiye yükleme sürtünmesini ortadan
+                                    kaldır.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S7 BUSINESS ══ -->
+    <section class="slide" id="s7">
+        <div class="slide-inner">
+            <div class="slide-num">07 — Ticari Değer</div>
+            <div class="rule"></div>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
+                Erken müşteri, <em style="font-style:italic;color:var(--goldl)">uzun ilişki</em>
+            </h2>
+            <div class="biz-top reveal">
+                <div class="biz-card">
+                    <div class="biz-badge g">↓ CAC</div>
+                    <div class="biz-t">Organik Müşteri Edinimi</div>
+                    <div class="biz-d">Kampüs kanalları (kulüpler, öğrenci toplulukları, peer-to-peer) geleneksel
+                        reklamı tamamlar. Mevcut "Arkadaşını Getir" kampanyası organik büyümenin kanıtı.</div>
+                    <div class="biz-src">Kuveyt Türk Kampüs programı mevcut kanalları</div>
+                </div>
+                <div class="biz-card">
+                    <div class="biz-badge gold">↑ LTV</div>
+                    <div class="biz-t">Yaşam Boyu Değer Zinciri</div>
+                    <div class="biz-d">Üniversitede Kampüs Kart → mezuniyette maaş hesabı → ilerleyen yıllarda yatırım
+                        ve finansman müşterisi. Müşteri 20'li yaşlarda kazanılmazsa rakiple ilişki kuruluyor.</div>
+                    <div class="biz-val gold">30+ <small>yıl ilişki potansiyeli</small></div>
+                    <div class="biz-src">Ekip analizi — standart bankacılık müşteri yaşam döngüsüne dayalı</div>
+                </div>
+                <div class="biz-card">
+                    <div class="biz-badge w">Marka</div>
+                    <div class="biz-t">Algı Dönüşümü</div>
+                    <div class="biz-d">Araştırma, bankacılığın gençler için "soğuk" algılandığını kanıtlıyor. Bu proje
+                        KT'yi gençlerin "yaşam ortağı" olarak konumlandırır ve NPS'i dönüştürür.</div>
+                    <div class="biz-src">Garanti BBVA / Be Node 2025 — "soğuk, uzak, sıkıcı" bulgusu</div>
+                </div>
+            </div>
+            <div class="ltv-section reveal">
+                <div class="ltv-label">Müşteri Yolculuğu — Sadakat Zinciri</div>
+                <div class="ltv-bar-wrap">
+                    <div class="ltv-seg ltv-s1"></div>
+                    <div class="ltv-seg ltv-s2"></div>
+                    <div class="ltv-seg ltv-s3"></div>
+                </div>
+                <div class="ltv-legend">
+                    <div class="ltv-leg">
+                        <div class="ltv-dot g"></div>Üniversite (~4 yıl) → Kampüs Kart & Ekosistem
+                    </div>
+                    <div class="ltv-leg">
+                        <div class="ltv-dot gold"></div>İlk İş (~8 yıl) → Maaş Hesabı & Birikimler
+                    </div>
+                    <div class="ltv-leg">
+                        <div class="ltv-dot w"></div>Profesyonel Hayat (18+ yıl) → Yatırım, Konut & Finansman
+                    </div>
+                </div>
+                <div class="ltv-note">Süre tahminleri ekip analizi niteliğinde olup standart bankacılık müşteri döngüsü
+                    modellerine dayanmaktadır.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S8 CLOSE ══ -->
+    <section class="slide" id="s8">
+        <div class="slide-inner" style="text-align:center">
+            <div class="slide-num" style="justify-content:center">08 — Sonuç</div>
+            <div class="rule center"></div>
+            <h2 class="close-title reveal">
+                Gençlerin bankası değil,<br>
+                <em>yaşam</em> <span class="gold">partneri</span> ol.
+            </h2>
+            <p class="close-sub reveal">7,08 milyon öğrenci, her yıl 900.000 yeni mezun ve araştırmalarla kanıtlanmış
+                bir aktif kullanım boşluğu. Fırsat penceresi açık.</p>
+            <div class="hero-cta reveal">
+                <a href="#s2" class="btn-g">← Verilere Dön</a>
+                <a href="#s4" class="btn-gold">Çözüme Bak →</a>
+            </div>
+            <div class="team-card reveal">
+                <div
+                    style="width:38px;height:38px;background:var(--kt);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:600;font-size:.7rem;color:#fff;flex-shrink:0;">
+                    KT</div>
+                <div class="team-card-lbl">
+                    <div class="team-card-t">Kuveyt Türk Kaşif İnovasyon Kampı</div>
+                    <div class="team-card-s">ÖNCÜ EKİBİ &nbsp;·&nbsp; 2025</div>
+                </div>
+            </div>
+            <div class="sources-footer reveal">
+                <div class="sf-title">Veri Kaynakları</div>
+                <div class="sf-list2">
+                    <div class="sf-item2">YÖK Yükseköğretim Bilgi Yönetim Sistemi — 2023-2024 öğrenci ve mezuniyet
+                        istatistikleri</div>
+                    <div class="sf-item2">Garanti BBVA / Türkiye Bilişim Vakfı Be Node — Gençlik Bankacılığı
+                        Araştırması, 2025 (Milliyet haberi üzerinden erişildi)</div>
+                    <div class="sf-item2">KPMG Türkiye — Bankacılık Sektörel Bakış 2024 (TBB kaynaklı dijital bankacılık
+                        verileri)</div>
+                    <div class="sf-item2">Kuveyt Türk — Kampüs Programı & Sağlam Kart Kampüs ürün sayfası, 2024</div>
+                    <div class="sf-item2">Anadolu Ajansı — Kuveyt Türk Kampüs Programı Basın Açıklaması, Ekim 2024</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // CURSOR
+        const cur = document.getElementById('cur'), curl = document.getElementById('curl');
+        let mx = 0, my = 0, lx = 0, ly = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
+        (function al() { lx += (mx - lx) * .1; ly += (my - ly) * .1; curl.style.left = lx + 'px'; curl.style.top = ly + 'px'; requestAnimationFrame(al); })();
+
+        // PROGRESS
+        window.addEventListener('scroll', () => {
+            document.getElementById('pb').style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
+            updateDots();
+        });
+
+        // NAV DOTS
+        const slides = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            let active = 0;
+            slides.forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (el) { const r = el.getBoundingClientRect(); if (r.top <= window.innerHeight / 2) active = i; }
+            });
+            dots.forEach((d, i) => d.classList.toggle('active', i === active));
+        }
+        document.querySelectorAll('.dot').forEach((d, i) => {
+            d.addEventListener('click', () => { document.getElementById(slides[i])?.scrollIntoView({ behavior: 'smooth' }); });
+        });
+
+        // COUNTERS
+        const ctr = new Set();
+        const cio = new IntersectionObserver(e => {
+            e.forEach(en => {
+                if (!en.isIntersecting) return;
+                en.target.querySelectorAll('.bstat-n[data-t]').forEach(el => {
+                    if (ctr.has(el)) return; ctr.add(el);
+                    const t = parseInt(el.dataset.t), s = el.dataset.s || '';
+                    let c = 0;
+                    const iv = setInterval(() => { c = Math.min(c + t / 55, t); el.textContent = Math.round(c) + s; if (c >= t) clearInterval(iv); }, 22);
+                });
+            });
+        }, { threshold: .2 });
+        document.querySelectorAll('.big-stats').forEach(el => cio.observe(el));
+
+        // SCROLL REVEAL
+        const rio = new IntersectionObserver(e => {
+            e.forEach((en, idx) => { if (en.isIntersecting) { setTimeout(() => en.target.classList.add('vis'), idx * 60); } });
+        }, { threshold: .08 });
+        document.querySelectorAll('.reveal').forEach(el => rio.observe(el));
+
+        // SMOOTH SCROLL FOR ANCHORS
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>
