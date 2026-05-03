@@ -636,8 +636,8 @@
         .ecosystem-wrapper {
             position: relative;
             width: 100%;
-            max-width: 860px;
-            height: 520px;
+            max-width: 960px;
+            height: 600px;
             margin: 3rem auto 0;
             display: flex;
             align-items: center;
@@ -664,26 +664,29 @@
         }
 
         .eco-center-card {
-            width: 300px;
-            height: 190px;
-            background: linear-gradient(135deg, rgba(22, 160, 134, 0.85), rgba(10, 80, 60, 0.95));
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 14px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             position: relative;
             z-index: 10;
-            padding: 1.8rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
-            backdrop-filter: blur(12px);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: none;
+            display: inline-block;
+        }
+
+        .eco-center-card img {
+            height: 260px;
+            width: auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.6s ease;
+            transform: rotate(90deg);
+        }
+
+        .eco-center-card:hover img {
+            box-shadow: 0 35px 70px rgba(22, 160, 134, 0.3);
         }
 
         .eco-center-card:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 35px 70px rgba(22, 160, 134, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: scale(1.06) translateY(-5px);
         }
 
         .card-top {
@@ -703,7 +706,10 @@
         .card-chip::after {
             content: '';
             position: absolute;
-            width: 100%; height: 1px; background: rgba(0, 0, 0, 0.2); top: 50%;
+            width: 100%;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.2);
+            top: 50%;
         }
 
         .card-contactless {
@@ -729,8 +735,10 @@
 
         .eco-nodes {
             position: absolute;
-            top: 50%; left: 50%;
-            width: 100%; height: 100%;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
             transform: translate(-50%, -50%);
             pointer-events: none;
         }
@@ -761,34 +769,103 @@
         }
 
         /* 3 nodes layout */
-        .pos-1, .pos-2, .pos-3 {
-            top: 50%; left: 50%;
+        .pos-1,
+        .pos-2,
+        .pos-3 {
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%) scale(0.6);
         }
 
         .ecosystem-wrapper:hover .eco-node {
-            opacity: 1; visibility: visible;
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Top Left */
-        .ecosystem-wrapper:hover .pos-1 { transform: translate(calc(-50% - 240px), calc(-50% - 160px)) scale(1); transition-delay: 0.0s; }
-        /* Top Right */
-        .ecosystem-wrapper:hover .pos-2 { transform: translate(calc(-50% + 240px), calc(-50% - 160px)) scale(1); transition-delay: 0.05s; }
-        /* Bottom Center */
-        .ecosystem-wrapper:hover .pos-3 { transform: translate(calc(-50%), calc(-50% + 180px)) scale(1); transition-delay: 0.1s; }
+        .ecosystem-wrapper:hover .pos-1 {
+            transform: translate(calc(-50% - 300px), calc(-50% - 200px)) scale(1);
+            transition-delay: 0.0s;
+        }
 
-        .node-ic { font-size: 1.6rem; margin-top: -0.2rem; flex-shrink: 0; }
-        .node-content { display: flex; flex-direction: column; align-items: flex-start; }
-        .node-t { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--cream); margin-bottom: 0.3rem; line-height: 1.2; }
-        .node-d { font-size: 0.75rem; color: var(--muted); line-height: 1.45; }
-        .node-tag { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.15em; color: var(--kt); border: 1px solid rgba(22, 160, 134, 0.2); padding: 0.2rem 0.5rem; border-radius: 2px; text-transform: uppercase; margin-top: 0.6rem; }
-        .node-tag.g { color: var(--ktl); border-color: rgba(0, 163, 85, 0.2); }
-        .node-exists { font-family: var(--mono); font-size: 0.52rem; color: rgba(0, 163, 85, 0.5); margin-top: 0.4rem; display: flex; align-items: center; gap: 0.2rem; }
-        .node-exists::before { content: '✓ MEVCUT:'; }
+        /* Top Right */
+        .ecosystem-wrapper:hover .pos-2 {
+            transform: translate(calc(-50% + 300px), calc(-50% - 200px)) scale(1);
+            transition-delay: 0.05s;
+        }
+
+        /* Bottom Center */
+        .ecosystem-wrapper:hover .pos-3 {
+            transform: translate(calc(-50%), calc(-50% + 240px)) scale(1);
+            transition-delay: 0.1s;
+        }
+
+        .node-ic {
+            font-size: 1.6rem;
+            margin-top: -0.2rem;
+            flex-shrink: 0;
+        }
+
+        .node-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .node-t {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .node-d {
+            font-size: 0.75rem;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .node-tag {
+            font-family: var(--mono);
+            font-size: 0.52rem;
+            letter-spacing: 0.15em;
+            color: var(--kt);
+            border: 1px solid rgba(22, 160, 134, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+            margin-top: 0.6rem;
+        }
+
+        .node-tag.g {
+            color: var(--ktl);
+            border-color: rgba(0, 163, 85, 0.2);
+        }
+
+        .node-exists {
+            font-family: var(--mono);
+            font-size: 0.52rem;
+            color: rgba(0, 163, 85, 0.5);
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .node-exists::before {
+            content: '✓ MEVCUT:';
+        }
 
         /* S5 and S6 specific styles */
-        #s5 { background: var(--ink); }
-        #s6 { background: var(--deep); }
+        #s5 {
+            background: var(--ink);
+        }
+
+        #s6 {
+            background: var(--deep);
+        }
 
         .feature-hero {
             display: grid;
@@ -806,7 +883,7 @@
             text-align: center;
             position: relative;
         }
-        
+
         .feature-ic-big {
             font-size: 4rem;
             margin-bottom: 1.5rem;
@@ -1487,17 +1564,36 @@
             }
 
             .ecosystem-wrapper {
-                height: auto; flex-direction: column; gap: 1.5rem; margin-top: 2rem;
+                height: auto;
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-top: 2rem;
             }
-            .eco-center-card { margin-bottom: 1rem; }
+
+            .eco-center-card {
+                margin-bottom: 1rem;
+            }
+
             .eco-nodes {
-                position: relative; top: auto; left: auto; transform: none;
-                display: flex; flex-direction: column; gap: 1rem; align-items: center;
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
             }
+
             .eco-node {
-                position: relative; top: auto !important; left: auto !important;
-                transform: none !important; width: 100%; max-width: 350px;
-                opacity: 1; visibility: visible;
+                position: relative;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                width: 100%;
+                max-width: 350px;
+                opacity: 1;
+                visibility: visible;
             }
 
             .bstat:nth-child(n) {
@@ -1678,14 +1774,7 @@
                 genişletiyoruz.</p>
             <div class="ecosystem-wrapper reveal">
                 <div class="eco-center-card">
-                    <div class="card-top">
-                        <div class="card-chip"></div>
-                        <div class="card-contactless">)))</div>
-                    </div>
-                    <div>
-                        <div class="card-logo">Kampüs Kart</div>
-                        <div class="card-tag">YAŞAM İŞLETİM SİSTEMİ</div>
-                    </div>
+                    <img src="kampus_kart.png" alt="Kampüs Kart">
                 </div>
                 <div class="eco-nodes">
                     <div class="eco-node pos-1">
@@ -1700,8 +1789,8 @@
                         <div class="node-ic">💰</div>
                         <div class="node-content">
                             <div class="node-t">Genişletilmiş Cashback</div>
-                            <div class="node-d">%10 pazar ve Spotify, Netflix gibi platformlarda indirim.</div>
-                            <div class="node-tag g">Mevcut altyapı</div>
+                            <div class="node-d">Kampüs İçindeki Cafelerde yapılan harcamalarda Cashback İmkanı</div>
+                            <div class="node-tag g">Planlanan altyapı</div>
                             <div class="node-exists">Sağlam Kart Kampüs altın puanı</div>
                         </div>
                     </div>
@@ -1724,31 +1813,38 @@
         <div class="slide-inner">
             <div class="slide-num">05 — Bağımsız Gelişim</div>
             <div class="rule"></div>
-            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;" class="reveal">
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
                 Kariyer & <em style="font-style:italic;color:var(--ktl)">Gelişim Merkezi</em>
             </h2>
             <div class="feature-hero reveal">
                 <div>
-                    <p style="font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;">Öğrenciler için finansal eğitim ve kariyer adımlarını tek merkeze topluyoruz. Kuveyt Türk, gençlerin ilk profesyonel adımlarında yanında.</p>
+                    <p style="font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;">Öğrenciler için
+                        finansal eğitim ve kariyer adımlarını tek merkeze topluyoruz. Kuveyt Türk, gençlerin ilk
+                        profesyonel adımlarında yanında.</p>
                     <div class="pain" style="margin-bottom:1rem;">
                         <div class="pain-ic">🎓</div>
                         <div>
                             <div class="pain-t">Sertifikalı Finansal Eğitim</div>
-                            <div class="pain-d">Dijital portal üzerinden erişilebilir ve banka onaylı eğitim programları.</div>
+                            <div class="pain-d">Dijital portal üzerinden erişilebilir ve banka onaylı eğitim
+                                programları.</div>
                         </div>
                     </div>
                     <div class="pain" style="margin-bottom:1rem;">
                         <div class="pain-ic">🚀</div>
                         <div>
                             <div class="pain-t">Staj ve İstihdam</div>
-                            <div class="pain-d">Kuveyt Türk bünyesinde ve iştiraklerinde staj başvurularının yönetimi.</div>
+                            <div class="pain-d">Kuveyt Türk bünyesinde ve iştiraklerinde staj başvurularının yönetimi.
+                            </div>
                         </div>
                     </div>
-                    <div class="sol-exists" style="margin-top:1.5rem;">Kaşif İnovasyon Kampı & Girişimci Kaşif sinerjisi</div>
+                    <div class="sol-exists" style="margin-top:1.5rem;">Kaşif İnovasyon Kampı & Girişimci Kaşif sinerjisi
+                    </div>
                 </div>
                 <div class="feature-img-box">
                     <span class="feature-ic-big">🎯</span>
-                    <h3 style="font-family:var(--serif);font-size:1.5rem;color:var(--ktl);margin-bottom:.5rem;">Geleceğin Yetenekleri</h3>
+                    <h3 style="font-family:var(--serif);font-size:1.5rem;color:var(--ktl);margin-bottom:.5rem;">
+                        Geleceğin Yetenekleri</h3>
                     <p style="font-size:.8rem;color:var(--muted);">Gençler bankayı kariyer kapısı olarak görür.</p>
                 </div>
             </div>
@@ -1760,17 +1856,23 @@
         <div class="slide-inner">
             <div class="slide-num">06 — Üniversite Ağları</div>
             <div class="rule"></div>
-            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;" class="reveal">
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
                 Kulüp & <em style="font-style:italic;color:var(--goldl)">Sponsorluk Portalı</em>
             </h2>
             <div class="feature-hero reveal">
-                <div class="feature-img-box" style="border-color:rgba(184, 144, 42, 0.2); background:rgba(184, 144, 42, 0.05);">
+                <div class="feature-img-box"
+                    style="border-color:rgba(184, 144, 42, 0.2); background:rgba(184, 144, 42, 0.05);">
                     <span class="feature-ic-big">🎪</span>
-                    <h3 style="font-family:var(--serif);font-size:1.5rem;color:var(--goldl);margin-bottom:.5rem;">Doğrudan İletişim</h3>
-                    <p style="font-size:.8rem;color:var(--muted);">KT'nin kurumsal sosyal sorumluluk bütçesini doğrudan öğrencilere ulaştırır.</p>
+                    <h3 style="font-family:var(--serif);font-size:1.5rem;color:var(--goldl);margin-bottom:.5rem;">
+                        Doğrudan İletişim</h3>
+                    <p style="font-size:.8rem;color:var(--muted);">KT'nin kurumsal sosyal sorumluluk bütçesini doğrudan
+                        öğrencilere ulaştırır.</p>
                 </div>
                 <div>
-                    <p style="font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;">Öğrenci kulüplerinin sponsorluk ve etkinlik taleplerini dijital portal üzerinden iletebileceği altyapı.</p>
+                    <p style="font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;">Öğrenci
+                        kulüplerinin sponsorluk ve etkinlik taleplerini dijital portal üzerinden iletebileceği altyapı.
+                    </p>
                     <div class="pain" style="margin-bottom:1rem; border-color:rgba(184, 144, 42, 0.1);">
                         <div class="pain-ic">🤝</div>
                         <div>
@@ -1782,7 +1884,8 @@
                         <div class="pain-ic">💡</div>
                         <div>
                             <div class="pain-t">Etkinlik İşbirlikleri</div>
-                            <div class="pain-d">Kuveyt Türk profesyonellerinin üniversite etkinliklerine katılım organizasyonu.</div>
+                            <div class="pain-d">Kuveyt Türk profesyonellerinin üniversite etkinliklerine katılım
+                                organizasyonu.</div>
                         </div>
                     </div>
                 </div>
