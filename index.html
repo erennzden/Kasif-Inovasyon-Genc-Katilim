@@ -633,88 +633,190 @@
             background: var(--deep);
         }
 
-        .sol-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: rgba(22, 160, 134, .1);
-            border: 1px solid rgba(22, 160, 134, .1);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 2.5rem;
+        .ecosystem-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 860px;
+            height: 520px;
+            margin: 3rem auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .sol-card {
-            background: var(--deep);
-            padding: 2rem 1.8rem;
-            transition: background .25s;
+        .ecosystem-wrapper::before {
+            content: 'ÜZERİNE GELİN';
+            position: absolute;
+            top: calc(50% + 110px);
+            left: 50%;
+            transform: translate(-50%, 0);
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: rgba(22, 160, 134, 0.5);
+            letter-spacing: 0.2em;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .ecosystem-wrapper:hover::before {
+            opacity: 0;
+        }
+
+        .eco-center-card {
+            width: 300px;
+            height: 190px;
+            background: linear-gradient(135deg, rgba(22, 160, 134, 0.85), rgba(10, 80, 60, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
+            backdrop-filter: blur(12px);
+            cursor: none;
+        }
+
+        .eco-center-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 35px 70px rgba(22, 160, 134, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-chip {
+            width: 42px;
+            height: 30px;
+            background: linear-gradient(135deg, #d4af37, #aa8529);
+            border-radius: 4px;
             position: relative;
         }
 
-        .sol-card:hover {
-            background: rgba(0, 92, 50, .08);
+        .card-chip::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 1px; background: rgba(0, 0, 0, 0.2); top: 50%;
         }
 
-        .sol-card.span2 {
-            grid-column: span 2;
-        }
-
-        .sol-ic {
+        .card-contactless {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            transform: rotate(90deg);
         }
 
-        .sol-t {
+        .card-logo {
             font-family: var(--serif);
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--cream);
-            margin-bottom: .5rem;
+            font-size: 1.6rem;
+            color: #fff;
+            letter-spacing: 0.05em;
         }
 
-        .sol-d {
-            font-size: .79rem;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .sol-tag {
-            display: inline-block;
-            margin-top: .8rem;
+        .card-tag {
             font-family: var(--mono);
-            font-size: .56rem;
-            letter-spacing: .15em;
-            color: var(--kt);
-            border: 1px solid rgba(22, 160, 134, .2);
-            padding: .15rem .5rem;
-            border-radius: 2px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.25em;
             text-transform: uppercase;
         }
 
-        .sol-tag.g {
-            color: var(--ktl);
-            border-color: rgba(0, 163, 85, .2);
+        .eco-nodes {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 100%; height: 100%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
         }
 
-        .sol-exists {
-            font-family: var(--mono);
-            font-size: .56rem;
-            color: rgba(0, 163, 85, .5);
-            margin-top: .5rem;
+        .eco-node {
+            position: absolute;
+            width: 260px;
+            padding: 1.2rem;
+            background: var(--deep);
+            border: 1px solid rgba(22, 160, 134, 0.25);
+            border-radius: 6px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            pointer-events: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            cursor: none;
             display: flex;
-            align-items: center;
-            gap: .3rem;
+            gap: 1rem;
+            align-items: flex-start;
         }
 
-        .sol-exists::before {
-            content: '✓ MEVCUT:';
+        .eco-node:hover {
+            border-color: var(--ktl);
+            box-shadow: 0 20px 40px rgba(22, 160, 134, 0.15);
+            z-index: 20;
+        }
+
+        /* 3 nodes layout */
+        .pos-1, .pos-2, .pos-3 {
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.6);
+        }
+
+        .ecosystem-wrapper:hover .eco-node {
+            opacity: 1; visibility: visible;
+        }
+
+        /* Top Left */
+        .ecosystem-wrapper:hover .pos-1 { transform: translate(calc(-50% - 240px), calc(-50% - 160px)) scale(1); transition-delay: 0.0s; }
+        /* Top Right */
+        .ecosystem-wrapper:hover .pos-2 { transform: translate(calc(-50% + 240px), calc(-50% - 160px)) scale(1); transition-delay: 0.05s; }
+        /* Bottom Center */
+        .ecosystem-wrapper:hover .pos-3 { transform: translate(calc(-50%), calc(-50% + 180px)) scale(1); transition-delay: 0.1s; }
+
+        .node-ic { font-size: 1.6rem; margin-top: -0.2rem; flex-shrink: 0; }
+        .node-content { display: flex; flex-direction: column; align-items: flex-start; }
+        .node-t { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--cream); margin-bottom: 0.3rem; line-height: 1.2; }
+        .node-d { font-size: 0.75rem; color: var(--muted); line-height: 1.45; }
+        .node-tag { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.15em; color: var(--kt); border: 1px solid rgba(22, 160, 134, 0.2); padding: 0.2rem 0.5rem; border-radius: 2px; text-transform: uppercase; margin-top: 0.6rem; }
+        .node-tag.g { color: var(--ktl); border-color: rgba(0, 163, 85, 0.2); }
+        .node-exists { font-family: var(--mono); font-size: 0.52rem; color: rgba(0, 163, 85, 0.5); margin-top: 0.4rem; display: flex; align-items: center; gap: 0.2rem; }
+        .node-exists::before { content: '✓ MEVCUT:'; }
+
+        /* S5 and S6 specific styles */
+        #s5 { background: var(--ink); }
+        #s6 { background: var(--deep); }
+
+        .feature-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .feature-img-box {
+            background: rgba(22, 160, 134, 0.05);
+            border: 1px solid rgba(22, 160, 134, 0.2);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .feature-ic-big {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
         }
 
         /* ════════════════════════════
    SLIDE 5 — STRATEGIC FIT
 ════════════════════════════ */
-        #s5 {
+        #s7 {
             background: var(--forest);
         }
 
@@ -832,7 +934,7 @@
         /* ════════════════════════════
    SLIDE 6 — INNOVATION DVF
 ════════════════════════════ */
-        #s6 {
+        #s8 {
             background: var(--ink);
         }
 
@@ -985,7 +1087,7 @@
         /* ════════════════════════════
    SLIDE 7 — BUSINESS CASE
 ════════════════════════════ */
-        #s7 {
+        #s9 {
             background: var(--deep);
         }
 
@@ -1202,7 +1304,7 @@
         /* ════════════════════════════
    SLIDE 8 — CLOSE
 ════════════════════════════ */
-        #s8 {
+        #s10 {
             background: var(--ink);
             text-align: center;
         }
@@ -1380,12 +1482,22 @@
             .sf-grid,
             .dvf-layout,
             .biz-top,
-            .sol-grid {
+            .feature-hero {
                 grid-template-columns: 1fr;
             }
 
-            .sol-grid .span2 {
-                grid-column: span 1;
+            .ecosystem-wrapper {
+                height: auto; flex-direction: column; gap: 1.5rem; margin-top: 2rem;
+            }
+            .eco-center-card { margin-bottom: 1rem; }
+            .eco-nodes {
+                position: relative; top: auto; left: auto; transform: none;
+                display: flex; flex-direction: column; gap: 1rem; align-items: center;
+            }
+            .eco-node {
+                position: relative; top: auto !important; left: auto !important;
+                transform: none !important; width: 100%; max-width: 350px;
+                opacity: 1; visibility: visible;
             }
 
             .bstat:nth-child(n) {
@@ -1411,11 +1523,13 @@
         <div class="dot active" data-s="s1" title="Giriş"></div>
         <div class="dot" data-s="s2" title="Pazar Verileri"></div>
         <div class="dot" data-s="s3" title="Problem"></div>
-        <div class="dot" data-s="s4" title="Çözüm"></div>
-        <div class="dot" data-s="s5" title="Stratejik Uyum"></div>
-        <div class="dot" data-s="s6" title="İnovasyon"></div>
-        <div class="dot" data-s="s7" title="Ticari Değer"></div>
-        <div class="dot" data-s="s8" title="Kapanış"></div>
+        <div class="dot" data-s="s4" title="Kampüs Kart"></div>
+        <div class="dot" data-s="s5" title="Kariyer & Gelişim"></div>
+        <div class="dot" data-s="s6" title="Kulüp & Sponsorluk"></div>
+        <div class="dot" data-s="s7" title="Stratejik Uyum"></div>
+        <div class="dot" data-s="s8" title="İnovasyon"></div>
+        <div class="dot" data-s="s9" title="Ticari Değer"></div>
+        <div class="dot" data-s="s10" title="Kapanış"></div>
     </div>
 
     <div id="topbar">
@@ -1562,55 +1676,124 @@
             <p style="font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.7;max-width:560px;"
                 class="reveal">Mevcut Kampüs programının üzerine inşa edilen 5 yeni katman. Sıfırdan başlamıyoruz —
                 genişletiyoruz.</p>
-            <div class="sol-grid reveal">
-                <div class="sol-card">
-                    <span class="sol-ic">🚌</span>
-                    <div class="sol-t">Bütünleşik Ulaşım</div>
-                    <div class="sol-d">Sağlam Kart Kampüs'ün şehir içi ulaşım sistemleriyle entegrasyonu. Tek kart, tüm
-                        şehir.</div>
-                    <div class="sol-tag">Entegrasyon</div>
+            <div class="ecosystem-wrapper reveal">
+                <div class="eco-center-card">
+                    <div class="card-top">
+                        <div class="card-chip"></div>
+                        <div class="card-contactless">)))</div>
+                    </div>
+                    <div>
+                        <div class="card-logo">Kampüs Kart</div>
+                        <div class="card-tag">YAŞAM İŞLETİM SİSTEMİ</div>
+                    </div>
                 </div>
-                <div class="sol-card">
-                    <span class="sol-ic">💰</span>
-                    <div class="sol-t">Genişletilmiş Cashback</div>
-                    <div class="sol-d">Mevcut %10 pazar/restoran indirimi ve altın puanın Spotify, Netflix gibi dijital
-                        platformlara yayılması.</div>
-                    <div class="sol-tag g">Mevcut altyapı üzerine</div>
-                    <div class="sol-exists">Sağlam Kart Kampüs altın puan sistemi</div>
-                </div>
-                <div class="sol-card">
-                    <span class="sol-ic">🏆</span>
-                    <div class="sol-t">KT-Kampüs Ligi</div>
-                    <div class="sol-d">Harcama ve finansal eğitimden puan kazan, sıralamada yüksel, teknolojik ödüller
-                        kazan. Mevcut "Arkadaşını Getir" mantığının oyunlaştırılmış evrimi.</div>
-                    <div class="sol-tag">Gamification</div>
-                    <div class="sol-exists">Arkadaşını Getir kampanyası</div>
-                </div>
-                <div class="sol-card span2">
-                    <span class="sol-ic">🎯</span>
-                    <div class="sol-t">Kariyer & Gelişim Merkezi</div>
-                    <div class="sol-d">Sertifikalı finansal eğitim entegrasyonu + staj başvurularının tek merkezden
-                        yönetimi. Kuveyt Türk'ün "Kaşif" inovasyon programı ve girişimcilik ekosistemiyle doğrudan
-                        sinerji. Gençler bankayı kariyer kapısı olarak görür.</div>
-                    <div class="sol-tag">Kariyer</div>
-                    <div class="sol-exists">Kaşif İnovasyon Kampı & Girişimci Kaşif programları</div>
-                </div>
-                <div class="sol-card">
-                    <span class="sol-ic">🎪</span>
-                    <div class="sol-t">Kulüp & Sponsorluk Portalı</div>
-                    <div class="sol-d">Öğrenci kulüplerinin sponsorluk ve etkinlik taleplerini dijital portal üzerinden
-                        iletebileceği altyapı. KT'nin kurumsal sosyal sorumluluk bütçesini doğrudan öğrencilere
-                        ulaştırır.</div>
-                    <div class="sol-tag">Topluluk</div>
+                <div class="eco-nodes">
+                    <div class="eco-node pos-1">
+                        <div class="node-ic">🚌</div>
+                        <div class="node-content">
+                            <div class="node-t">Bütünleşik Ulaşım</div>
+                            <div class="node-d">Şehir içi ulaşım entegrasyonu. Tek kart, tüm şehir.</div>
+                            <div class="node-tag">Entegrasyon</div>
+                        </div>
+                    </div>
+                    <div class="eco-node pos-2">
+                        <div class="node-ic">💰</div>
+                        <div class="node-content">
+                            <div class="node-t">Genişletilmiş Cashback</div>
+                            <div class="node-d">%10 pazar ve Spotify, Netflix gibi platformlarda indirim.</div>
+                            <div class="node-tag g">Mevcut altyapı</div>
+                            <div class="node-exists">Sağlam Kart Kampüs altın puanı</div>
+                        </div>
+                    </div>
+                    <div class="eco-node pos-3">
+                        <div class="node-ic">🏆</div>
+                        <div class="node-content">
+                            <div class="node-t">KT-Kampüs Ligi</div>
+                            <div class="node-d">Puan kazan, sıralamada yüksel, teknolojik ödüller kazan.</div>
+                            <div class="node-tag">Gamification</div>
+                            <div class="node-exists">Arkadaşını Getir kampanyası</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ══ S5 STRATEGIC FIT ══ -->
+    <!-- ══ S5 KARIYER ══ -->
     <section class="slide" id="s5">
         <div class="slide-inner">
-            <div class="slide-num">05 — Neden KT, Neden Şimdi?</div>
+            <div class="slide-num">05 — Bağımsız Gelişim</div>
+            <div class="rule"></div>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;" class="reveal">
+                Kariyer & <em style="font-style:italic;color:var(--ktl)">Gelişim Merkezi</em>
+            </h2>
+            <div class="feature-hero reveal">
+                <div>
+                    <p style="font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;">Öğrenciler için finansal eğitim ve kariyer adımlarını tek merkeze topluyoruz. Kuveyt Türk, gençlerin ilk profesyonel adımlarında yanında.</p>
+                    <div class="pain" style="margin-bottom:1rem;">
+                        <div class="pain-ic">🎓</div>
+                        <div>
+                            <div class="pain-t">Sertifikalı Finansal Eğitim</div>
+                            <div class="pain-d">Dijital portal üzerinden erişilebilir ve banka onaylı eğitim programları.</div>
+                        </div>
+                    </div>
+                    <div class="pain" style="margin-bottom:1rem;">
+                        <div class="pain-ic">🚀</div>
+                        <div>
+                            <div class="pain-t">Staj ve İstihdam</div>
+                            <div class="pain-d">Kuveyt Türk bünyesinde ve iştiraklerinde staj başvurularının yönetimi.</div>
+                        </div>
+                    </div>
+                    <div class="sol-exists" style="margin-top:1.5rem;">Kaşif İnovasyon Kampı & Girişimci Kaşif sinerjisi</div>
+                </div>
+                <div class="feature-img-box">
+                    <span class="feature-ic-big">🎯</span>
+                    <h3 style="font-family:var(--serif);font-size:1.5rem;color:var(--ktl);margin-bottom:.5rem;">Geleceğin Yetenekleri</h3>
+                    <p style="font-size:.8rem;color:var(--muted);">Gençler bankayı kariyer kapısı olarak görür.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S6 KULÜP ══ -->
+    <section class="slide" id="s6">
+        <div class="slide-inner">
+            <div class="slide-num">06 — Üniversite Ağları</div>
+            <div class="rule"></div>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;" class="reveal">
+                Kulüp & <em style="font-style:italic;color:var(--goldl)">Sponsorluk Portalı</em>
+            </h2>
+            <div class="feature-hero reveal">
+                <div class="feature-img-box" style="border-color:rgba(184, 144, 42, 0.2); background:rgba(184, 144, 42, 0.05);">
+                    <span class="feature-ic-big">🎪</span>
+                    <h3 style="font-family:var(--serif);font-size:1.5rem;color:var(--goldl);margin-bottom:.5rem;">Doğrudan İletişim</h3>
+                    <p style="font-size:.8rem;color:var(--muted);">KT'nin kurumsal sosyal sorumluluk bütçesini doğrudan öğrencilere ulaştırır.</p>
+                </div>
+                <div>
+                    <p style="font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;">Öğrenci kulüplerinin sponsorluk ve etkinlik taleplerini dijital portal üzerinden iletebileceği altyapı.</p>
+                    <div class="pain" style="margin-bottom:1rem; border-color:rgba(184, 144, 42, 0.1);">
+                        <div class="pain-ic">🤝</div>
+                        <div>
+                            <div class="pain-t">Sponsorluk Başvuruları</div>
+                            <div class="pain-d">Kulüp etkinlikleri için şeffaf, hızlı ve dijital başvuru süreci.</div>
+                        </div>
+                    </div>
+                    <div class="pain" style="margin-bottom:1rem; border-color:rgba(184, 144, 42, 0.1);">
+                        <div class="pain-ic">💡</div>
+                        <div>
+                            <div class="pain-t">Etkinlik İşbirlikleri</div>
+                            <div class="pain-d">Kuveyt Türk profesyonellerinin üniversite etkinliklerine katılım organizasyonu.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ S7 STRATEGIC FIT ══ -->
+    <section class="slide" id="s7">
+        <div class="slide-inner">
+            <div class="slide-num">07 — Neden KT, Neden Şimdi?</div>
             <div class="rule"></div>
             <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
                 class="reveal">
@@ -1681,9 +1864,9 @@
     </section>
 
     <!-- ══ S6 INNOVATION ══ -->
-    <section class="slide" id="s6">
+    <section class="slide" id="s8">
         <div class="slide-inner">
-            <div class="slide-num">06 — İnovasyon Analizi</div>
+            <div class="slide-num">08 — İnovasyon Analizi</div>
             <div class="rule"></div>
             <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
                 class="reveal">
@@ -1780,9 +1963,9 @@
     </section>
 
     <!-- ══ S7 BUSINESS ══ -->
-    <section class="slide" id="s7">
+    <section class="slide" id="s9">
         <div class="slide-inner">
-            <div class="slide-num">07 — Ticari Değer</div>
+            <div class="slide-num">09 — Ticari Değer</div>
             <div class="rule"></div>
             <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
                 class="reveal">
@@ -1837,9 +2020,9 @@
     </section>
 
     <!-- ══ S8 CLOSE ══ -->
-    <section class="slide" id="s8">
+    <section class="slide" id="s10">
         <div class="slide-inner" style="text-align:center">
-            <div class="slide-num" style="justify-content:center">08 — Sonuç</div>
+            <div class="slide-num" style="justify-content:center">10 — Sonuç</div>
             <div class="rule center"></div>
             <h2 class="close-title reveal">
                 Gençlerin bankası değil,<br>
@@ -1890,7 +2073,7 @@
         });
 
         // NAV DOTS
-        const slides = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
+        const slides = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10'];
         function updateDots() {
             const dots = document.querySelectorAll('.dot');
             let active = 0;
