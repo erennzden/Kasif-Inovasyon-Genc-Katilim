@@ -1635,21 +1635,50 @@
             border-radius: 2px;
         }
 
+        /* ═══ MOBILE RESPONSIVE ═══ */
         @media (max-width:900px) {
+
+            /* Disable custom cursor on touch devices */
+            body {
+                cursor: auto;
+            }
+
+            #cur,
+            #curl {
+                display: none !important;
+            }
+
+            .dot,
+            .btn-g,
+            .btn-gold,
+            .eco-center-card {
+                cursor: pointer;
+            }
+
             #nav-dots {
                 display: none;
             }
 
             #topbar {
-                padding: 1rem 1.5rem;
+                padding: .8rem 1rem;
             }
 
             .tb-right {
                 display: none;
             }
 
+            .tb-name {
+                font-size: .95rem;
+                padding-left: .8rem;
+            }
+
+            .tb-logo {
+                height: 22px;
+            }
+
             .slide {
-                padding: 5rem 1.5rem 3rem;
+                padding: 5rem 1.2rem 2.5rem;
+                min-height: auto;
                 scroll-snap-align: none;
             }
 
@@ -1657,15 +1686,31 @@
                 scroll-snap-type: none;
             }
 
+            /* All 2-column grids → 1 column */
             .big-stats,
             .prob-layout,
             .sf-grid,
             .dvf-layout,
             .biz-top,
             .feature-hero {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem;
             }
 
+            .bstat {
+                padding: 1.8rem 1.5rem;
+            }
+
+            .bstat:nth-child(n) {
+                border-right: none;
+                border-bottom: 1px solid rgba(22, 160, 134, .1);
+            }
+
+            .bstat:last-child {
+                border-bottom: none;
+            }
+
+            /* Ecosystem wrapper */
             .ecosystem-wrapper {
                 height: auto;
                 flex-direction: column;
@@ -1673,41 +1718,223 @@
                 margin-top: 2rem;
             }
 
+            .ecosystem-wrapper::before {
+                display: none;
+            }
+
+            .eco-center-card img {
+                height: 180px;
+            }
+
             .eco-nodes {
                 position: relative;
                 top: auto;
                 left: auto;
                 transform: none;
+                width: 100%;
+                height: auto;
                 display: flex;
                 flex-direction: column;
                 gap: 1rem;
-                align-items: center;
+                align-items: stretch;
             }
 
             .eco-node {
-                position: relative;
+                position: relative !important;
                 top: auto !important;
                 left: auto !important;
                 transform: none !important;
-                width: 100%;
-                max-width: 350px;
-                opacity: 1;
-                visibility: visible;
+                width: 100% !important;
+                max-width: 100%;
+                opacity: 1 !important;
+                visibility: visible !important;
             }
 
-            .bstat:nth-child(n) {
-                border-right: 1px solid rgba(22, 160, 134, .1);
-                border-bottom: 1px solid rgba(22, 160, 134, .1);
+            /* S2b & S8 — 3-col grids → 1-col on mobile */
+            .mobile-grid-3 {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
             }
 
-            .ltv-legend {
-                flex-direction: column;
-                gap: .4rem;
+            /* S9 — 4-col team grid → 2-col on mobile */
+            .mobile-grid-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1rem !important;
             }
 
+            /* Card personalise */
             .card-personalise {
                 flex-direction: column;
                 gap: 1rem;
+                padding: 1.2rem 1rem;
+            }
+
+            .mini-cards {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            /* LTV Legend */
+            .ltv-legend {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            .ltv-section {
+                padding: 1.2rem 1rem;
+            }
+
+            /* Pain items */
+            .pain {
+                padding: 1rem 1.2rem;
+            }
+
+            .prob-quote {
+                padding: 1.5rem;
+            }
+
+            /* Feature hero */
+            .feature-hero {
+                gap: 2rem !important;
+            }
+
+            .feature-img-box {
+                padding: 2rem 1.5rem;
+            }
+
+            /* SF items */
+            .sf-grid {
+                gap: 2rem !important;
+            }
+
+            /* Biz cards */
+            .biz-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .biz-val {
+                font-size: 2rem;
+            }
+
+            /* Sources footer */
+            .sources-footer {
+                padding: 1.2rem 1rem;
+            }
+
+            /* Team card */
+            .team-card {
+                padding: .8rem 1.2rem;
+            }
+
+            /* KT Box */
+            .kt-box-big {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .kt-fact {
+                flex-direction: column;
+                gap: .3rem;
+                align-items: flex-start;
+            }
+
+            /* DVF cards */
+            .dvf-c {
+                padding: 1.2rem;
+            }
+
+            .dvf-score {
+                font-size: 2rem;
+                width: 50px;
+            }
+
+            /* Disclaimer box */
+            .disclaimer-box {
+                padding: .6rem .8rem;
+            }
+
+            /* Hero adjustments */
+            #s1 {
+                padding: 5rem 1.2rem 3rem;
+            }
+
+            .hero-eyebrow {
+                font-size: .55rem;
+                padding: .3rem .7rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-sub {
+                font-size: .88rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+                gap: .8rem;
+            }
+
+            .btn-g,
+            .btn-gold {
+                width: 100%;
+                max-width: 260px;
+                justify-content: center;
+            }
+
+            /* Close section */
+            .close-sub {
+                font-size: .85rem;
+            }
+        }
+
+        /* ═══ SMALL MOBILE (≤480px) ═══ */
+        @media (max-width:480px) {
+
+            .slide {
+                padding: 4.5rem 1rem 2rem;
+            }
+
+            #topbar {
+                padding: .7rem .8rem;
+            }
+
+            .tb-name {
+                font-size: .82rem;
+                padding-left: .6rem;
+            }
+
+            .tb-logo {
+                height: 18px;
+            }
+
+            /* Team grid → 1 column on very small */
+            .mobile-grid-4 {
+                grid-template-columns: 1fr !important;
+            }
+
+            .eco-center-card img {
+                height: 140px;
+            }
+
+            .bstat-n {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .prob-layout {
+                gap: 1.5rem !important;
+            }
+
+            .quote-text {
+                font-size: 1.2rem;
+            }
+
+            .prob-quote::before {
+                font-size: 5rem;
+            }
+
+            .mini-card {
+                width: 60px;
+                height: 38px;
             }
         }
     </style>
@@ -1831,29 +2058,35 @@
         <div class="slide-inner">
             <div class="slide-num">03 — Pazar Fırsatı</div>
             <div class="rule"></div>
-            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;" class="reveal">
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
                 Rakamlar <em style="font-style:italic;color:var(--ktl)">fırsatı</em> gösteriyor
             </h2>
-            <p style="font-size:.9rem;color:var(--muted);margin-top:.8rem;line-height:1.7;" class="reveal">Tüm veriler kamuya açık kaynaklardan alınmıştır.</p>
+            <p style="font-size:.9rem;color:var(--muted);margin-top:.8rem;line-height:1.7;" class="reveal">Tüm veriler
+                kamuya açık kaynaklardan alınmıştır.</p>
             <div class="big-stats reveal">
                 <div class="bstat">
                     <span class="bstat-n g" data-t="7" data-s=",08M">0</span>
-                    <div class="bstat-lbl">Türkiye'de yükseköğrenimdeki toplam öğrenci sayısı — projenin doğrudan hedef kitlesi</div>
+                    <div class="bstat-lbl">Türkiye'de yükseköğrenimdeki toplam öğrenci sayısı — projenin doğrudan hedef
+                        kitlesi</div>
                     <div class="bstat-src">YÖK Yükseköğretim Bilgi Yönetim Sistemi, 2023-2024</div>
                 </div>
                 <div class="bstat">
                     <span class="bstat-n gold" data-t="95" data-s="%">0</span>
-                    <div class="bstat-lbl">Gençlerin banka hesabı sahibi olma oranı — ancak aktif kullananlar <strong style="color:var(--cream)">%50'nin altında</strong></div>
+                    <div class="bstat-lbl">Gençlerin banka hesabı sahibi olma oranı — ancak aktif kullananlar <strong
+                            style="color:var(--cream)">%50'nin altında</strong></div>
                     <div class="bstat-src">Garanti BBVA / TBV Be Node Araştırması, 2025</div>
                 </div>
                 <div class="bstat">
                     <span class="bstat-n w" data-t="84" data-s="%">0</span>
-                    <div class="bstat-lbl">Gençlerin tüm bankacılık işlemlerini <strong style="color:var(--cream)">yalnızca mobil</strong> üzerinden yapma oranı</div>
+                    <div class="bstat-lbl">Gençlerin tüm bankacılık işlemlerini <strong
+                            style="color:var(--cream)">yalnızca mobil</strong> üzerinden yapma oranı</div>
                     <div class="bstat-src">Garanti BBVA / TBV Be Node Araştırması, 2025</div>
                 </div>
                 <div class="bstat">
                     <span class="bstat-n g" data-t="900" data-s="K+">0</span>
-                    <div class="bstat-lbl">Her yıl iş hayatına katılan yeni mezun sayısı — müşteri yolculuğunun kritik başlangıç noktası</div>
+                    <div class="bstat-lbl">Her yıl iş hayatına katılan yeni mezun sayısı — müşteri yolculuğunun kritik
+                        başlangıç noktası</div>
                     <div class="bstat-src">YÖK Yükseköğretim Mezuniyet İstatistikleri, 2022-2023</div>
                 </div>
             </div>
@@ -1865,42 +2098,64 @@
         <div class="slide-inner">
             <div class="slide-num">04 — Genç Katılım Ekosistemi</div>
             <div class="rule"></div>
-            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;" class="reveal">
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
                 Genç Katılım Ekosistemi <em style="font-style:italic;color:var(--ktl)">Nedir?</em>
             </h2>
-            <p style="font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.7;max-width:580px;" class="reveal">
-                Kampüs Kart'ı merkeze alan; ulaşım, kariyer, sosyal yaşam ve finansal gelişimi tek çatı altında birleştiren bir üniversite yaşam platformu.
+            <p style="font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.7;max-width:580px;"
+                class="reveal">
+                Kampüs Kart'ı merkeze alan; ulaşım, kariyer, sosyal yaşam ve finansal gelişimi tek çatı altında
+                birleştiren bir üniversite yaşam platformu.
             </p>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem;" class="reveal">
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem;"
+                class="reveal mobile-grid-3">
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
                     <div style="font-size:1.4rem;">💳</div>
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Finansal Başlangıç</div>
-                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Kampüs Kart ile dijital hesap, altın puan ve cashback. Gencin ilk gerçek bankacılık deneyimi.</div>
+                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Finansal
+                        Başlangıç</div>
+                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Kampüs Kart ile dijital hesap,
+                        altın puan ve cashback. Gencin ilk gerçek bankacılık deneyimi.</div>
                 </div>
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
                     <div style="font-size:1.4rem;">🚌</div>
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Bütünleşik Ulaşım</div>
-                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Şehir içi ulaşım entegrasyonu. Ayrı kart yok, ayrı bakiye yükleme yok — tek kart, tüm şehir.</div>
+                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">
+                        Bütünleşik Ulaşım</div>
+                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Şehir içi ulaşım entegrasyonu.
+                        Ayrı kart yok, ayrı bakiye yükleme yok — tek kart, tüm şehir.</div>
                 </div>
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
                     <div style="font-size:1.4rem;">🎯</div>
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Kariyer & Staj</div>
-                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">KT staj portalı, mentörlük ağı ve sektör etkinlikleri. Gencin özgeçmişine doğrudan değer katar.</div>
+                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Kariyer
+                        & Staj</div>
+                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">KT staj portalı, mentörlük ağı ve
+                        sektör etkinlikleri. Gencin özgeçmişine doğrudan değer katar.</div>
                 </div>
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
                     <div style="font-size:1.4rem;">🎪</div>
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Kulüp & Sosyal Yaşam</div>
-                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Öğrenci kulüplerine sponsorluk, etkinlik finansmanı ve organizasyon desteği. Banka kampüse girer.</div>
+                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Kulüp &
+                        Sosyal Yaşam</div>
+                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Öğrenci kulüplerine sponsorluk,
+                        etkinlik finansmanı ve organizasyon desteği. Banka kampüse girer.</div>
                 </div>
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.03);display:flex;flex-direction:column;gap:.6rem;">
                     <div style="font-size:1.4rem;">📚</div>
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Finansal Okuryazarlık</div>
-                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Uygulama içi eğitim modülleri, birikim hedefleri ve harcama analitiği. Bilinçli nesil yaratılır.</div>
+                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);">Finansal
+                        Okuryazarlık</div>
+                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Uygulama içi eğitim modülleri,
+                        birikim hedefleri ve harcama analitiği. Bilinçli nesil yaratılır.</div>
                 </div>
-                <div style="border:1px solid rgba(22,160,134,.35);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.08);display:flex;flex-direction:column;gap:.6rem;">
+                <div
+                    style="border:1px solid rgba(22,160,134,.35);border-radius:6px;padding:1.4rem 1.3rem;background:rgba(22,160,134,.08);display:flex;flex-direction:column;gap:.6rem;">
                     <div style="font-size:1.4rem;">🔗</div>
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--kt);">Tek Ekosistem</div>
-                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Tüm bu katmanlar mevcut Kampüs altyapısı üzerine inşa edilir. Sıfırdan değil — genişletme.</div>
+                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--kt);">Tek
+                        Ekosistem</div>
+                    <div style="font-size:.78rem;color:var(--muted);line-height:1.6;">Tüm bu katmanlar mevcut Kampüs
+                        altyapısı üzerine inşa edilir. Sıfırdan değil — genişletme.</div>
                 </div>
             </div>
         </div>
@@ -2195,30 +2450,56 @@
         <div class="slide-inner">
             <div class="slide-num">08 — İnovasyon Analizi</div>
             <div class="rule"></div>
-            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;" class="reveal">
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
                 Üniversite Yaşam <em style="font-style:italic;color:var(--ktl)">İşletim Sistemi</em>
             </h2>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;" class="reveal">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;"
+                class="reveal mobile-grid-3">
                 <!-- Arzulanabilirlik -->
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:2rem 1.6rem;display:flex;flex-direction:column;gap:1rem;background:rgba(22,160,134,.03);">
-                    <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--kt);text-transform:uppercase;">ARZULANABİLİRLİK</div>
-                    <div style="font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-weight:300;color:var(--kt);line-height:1;">%84</div>
-                    <div style="font-size:.82rem;color:var(--cream);line-height:1.65;flex:1;">Gençler zaten mobil-only bankacılık kullanıyor. İhtiyaç doğrudan net.</div>
-                    <div style="font-size:.68rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.8rem;line-height:1.5;">Kaynak: Garanti BBVA / Be Node 2025</div>
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:2rem 1.6rem;display:flex;flex-direction:column;gap:1rem;background:rgba(22,160,134,.03);">
+                    <div
+                        style="font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--kt);text-transform:uppercase;">
+                        ARZULANABİLİRLİK</div>
+                    <div
+                        style="font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-weight:300;color:var(--kt);line-height:1;">
+                        %84</div>
+                    <div style="font-size:.82rem;color:var(--cream);line-height:1.65;flex:1;">Gençler zaten mobil-only
+                        bankacılık kullanıyor. İhtiyaç doğrudan net.</div>
+                    <div
+                        style="font-size:.68rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.8rem;line-height:1.5;">
+                        Kaynak: Garanti BBVA / Be Node 2025</div>
                 </div>
                 <!-- Uygulanabilirlik -->
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:2rem 1.6rem;display:flex;flex-direction:column;gap:1rem;background:rgba(22,160,134,.03);">
-                    <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--kt);text-transform:uppercase;">UYGULANABİLİRLİK</div>
-                    <div style="font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-weight:300;color:var(--kt);line-height:1;">447</div>
-                    <div style="font-size:.82rem;color:var(--cream);line-height:1.65;flex:1;">Mevcut şube, kampüs programı ve dijital altyapı hızla hazır.</div>
-                    <div style="font-size:.68rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.8rem;line-height:1.5;">Kaynak: KT 2024 Faaliyet Raporu</div>
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:2rem 1.6rem;display:flex;flex-direction:column;gap:1rem;background:rgba(22,160,134,.03);">
+                    <div
+                        style="font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--kt);text-transform:uppercase;">
+                        UYGULANABİLİRLİK</div>
+                    <div
+                        style="font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-weight:300;color:var(--kt);line-height:1;">
+                        447</div>
+                    <div style="font-size:.82rem;color:var(--cream);line-height:1.65;flex:1;">Mevcut şube, kampüs
+                        programı ve dijital altyapı hızla hazır.</div>
+                    <div
+                        style="font-size:.68rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.8rem;line-height:1.5;">
+                        Kaynak: KT 2024 Faaliyet Raporu</div>
                 </div>
                 <!-- Viability -->
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:2rem 1.6rem;display:flex;flex-direction:column;gap:1rem;background:rgba(22,160,134,.03);">
-                    <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--kt);text-transform:uppercase;">VİABİLİTY</div>
-                    <div style="font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-weight:300;color:var(--kt);line-height:1;">900K+</div>
-                    <div style="font-size:.82rem;color:var(--cream);line-height:1.65;flex:1;">Her yıl yeni mezun. Müşteri havuzu ve ilişki potansiyeli çok büyük.</div>
-                    <div style="font-size:.68rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.8rem;line-height:1.5;">Kaynak: YÖK Mezuniyet İstatistikleri 2022-23</div>
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:2rem 1.6rem;display:flex;flex-direction:column;gap:1rem;background:rgba(22,160,134,.03);">
+                    <div
+                        style="font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--kt);text-transform:uppercase;">
+                        VİABİLİTY</div>
+                    <div
+                        style="font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-weight:300;color:var(--kt);line-height:1;">
+                        900K+</div>
+                    <div style="font-size:.82rem;color:var(--cream);line-height:1.65;flex:1;">Her yıl yeni mezun.
+                        Müşteri havuzu ve ilişki potansiyeli çok büyük.</div>
+                    <div
+                        style="font-size:.68rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.8rem;line-height:1.5;">
+                        Kaynak: YÖK Mezuniyet İstatistikleri 2022-23</div>
                 </div>
             </div>
             <div class="ltv-section reveal" style="margin-top:2rem;">
@@ -2229,11 +2510,18 @@
                     <div class="ltv-seg ltv-s3"></div>
                 </div>
                 <div class="ltv-legend">
-                    <div class="ltv-leg"><div class="ltv-dot g"></div>Üniversite (~4 yıl) → Kampüs Kart &amp; Ekosistem</div>
-                    <div class="ltv-leg"><div class="ltv-dot gold"></div>İlk İş (~8 yıl) → Maaş Hesabı &amp; Birikimler</div>
-                    <div class="ltv-leg"><div class="ltv-dot w"></div>Profesyonel Hayat (18+ yıl) → Yatırım, Konut &amp; Finansman</div>
+                    <div class="ltv-leg">
+                        <div class="ltv-dot g"></div>Üniversite (~4 yıl) → Kampüs Kart &amp; Ekosistem
+                    </div>
+                    <div class="ltv-leg">
+                        <div class="ltv-dot gold"></div>İlk İş (~8 yıl) → Maaş Hesabı &amp; Birikimler
+                    </div>
+                    <div class="ltv-leg">
+                        <div class="ltv-dot w"></div>Profesyonel Hayat (18+ yıl) → Yatırım, Konut &amp; Finansman
+                    </div>
                 </div>
-                <div class="ltv-note">Süre tahminleri ekip analizi niteliğinde olup standart bankacılık müşteri döngüsü modellerine dayanmaktadır.</div>
+                <div class="ltv-note">Süre tahminleri ekip analizi niteliğinde olup standart bankacılık müşteri döngüsü
+                    modellerine dayanmaktadır.</div>
             </div>
         </div>
     </section>
@@ -2243,41 +2531,77 @@
         <div class="slide-inner">
             <div class="slide-num">09 — Ekip Tanıtımı</div>
             <div class="rule"></div>
-            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;" class="reveal">
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:-.02em;"
+                class="reveal">
                 ÖNCÜ <em style="font-style:italic;color:var(--ktl)">Ekibi</em>
             </h2>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.5rem;" class="reveal">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.5rem;"
+                class="reveal mobile-grid-4">
                 <!-- Mehmet Eren -->
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;background:rgba(22,160,134,.03);">
-                    <img src="resim1.jpeg" alt="Mehmet Eren Özden" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(22,160,134,.3);flex-shrink:0;">
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);line-height:1.3;">Mehmet Eren<br>ÖZDEN</div>
-                    <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--kt);text-transform:uppercase;">Dokuz Eylül Üniversitesi</div>
-                    <div style="font-size:.75rem;color:var(--muted);line-height:1.5;">Yönetim Bilişim Sistemleri (4. Sınıf)</div>
-                    <div style="font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--rule);">İzmir Şubesi</div>
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;background:rgba(22,160,134,.03);">
+                    <img src="resim1.jpeg" alt="Mehmet Eren Özden"
+                        style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(22,160,134,.3);flex-shrink:0;">
+                    <div
+                        style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);line-height:1.3;">
+                        Mehmet Eren<br>ÖZDEN</div>
+                    <div
+                        style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--kt);text-transform:uppercase;">
+                        Dokuz Eylül Üniversitesi</div>
+                    <div style="font-size:.75rem;color:var(--muted);line-height:1.5;">Yönetim Bilişim Sistemleri (4.
+                        Sınıf)</div>
+                    <div
+                        style="font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--rule);">
+                        İzmir Şubesi</div>
                 </div>
                 <!-- Gökhan -->
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;background:rgba(22,160,134,.03);">
-                    <img src="resim2.jpeg" alt="Gökhan Ceyhan" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(22,160,134,.3);flex-shrink:0;">
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);line-height:1.3;">Gökhan<br>CEYHAN</div>
-                    <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--kt);text-transform:uppercase;">İstanbul Üniversitesi</div>
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;background:rgba(22,160,134,.03);">
+                    <img src="resim2.jpeg" alt="Gökhan Ceyhan"
+                        style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(22,160,134,.3);flex-shrink:0;">
+                    <div
+                        style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);line-height:1.3;">
+                        Gökhan<br>CEYHAN</div>
+                    <div
+                        style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--kt);text-transform:uppercase;">
+                        İstanbul Üniversitesi</div>
                     <div style="font-size:.75rem;color:var(--muted);line-height:1.5;">İktisat (4. Sınıf)</div>
-                    <div style="font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--rule);">Laleli Şubesi</div>
+                    <div
+                        style="font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--rule);">
+                        Laleli Şubesi</div>
                 </div>
                 <!-- Ahmet Fatih -->
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;background:rgba(22,160,134,.03);">
-                    <img src="resim3.jpeg" alt="Ahmet Fatih Celep" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(22,160,134,.3);flex-shrink:0;">
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);line-height:1.3;">Ahmet Fatih<br>CELEP</div>
-                    <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--kt);text-transform:uppercase;">Dokuz Eylül Üniversitesi</div>
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;background:rgba(22,160,134,.03);">
+                    <img src="resim3.jpeg" alt="Ahmet Fatih Celep"
+                        style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(22,160,134,.3);flex-shrink:0;">
+                    <div
+                        style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);line-height:1.3;">
+                        Ahmet Fatih<br>CELEP</div>
+                    <div
+                        style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--kt);text-transform:uppercase;">
+                        Dokuz Eylül Üniversitesi</div>
                     <div style="font-size:.75rem;color:var(--muted);line-height:1.5;">İşletme (4. Sınıf)</div>
-                    <div style="font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--rule);">Buca Şubesi</div>
+                    <div
+                        style="font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--rule);">
+                        Buca Şubesi</div>
                 </div>
                 <!-- Muhammed Esad -->
-                <div style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;background:rgba(22,160,134,.03);">
-                    <img src="resim4.jpeg" alt="Muhammed Esad Aşpınar" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(22,160,134,.3);flex-shrink:0;">
-                    <div style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);line-height:1.3;">Muhammed Esad<br>AŞPINAR</div>
-                    <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--kt);text-transform:uppercase;">Marmara Üniversitesi</div>
-                    <div style="font-size:.75rem;color:var(--muted);line-height:1.5;">Siyaset Bilimi ve Uluslararası İlişkiler (4. Sınıf)</div>
-                    <div style="font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--rule);">Maltepe Şubesi</div>
+                <div
+                    style="border:1px solid rgba(22,160,134,.18);border-radius:6px;padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;background:rgba(22,160,134,.03);">
+                    <img src="resim4.jpeg" alt="Muhammed Esad Aşpınar"
+                        style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(22,160,134,.3);flex-shrink:0;">
+                    <div
+                        style="font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--cream);line-height:1.3;">
+                        Muhammed Esad<br>AĞPINAR</div>
+                    <div
+                        style="font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--kt);text-transform:uppercase;">
+                        Marmara Üniversitesi</div>
+                    <div style="font-size:.75rem;color:var(--muted);line-height:1.5;">Siyaset Bilimi ve Uluslararası
+                        İlişkiler (4. Sınıf)</div>
+                    <div
+                        style="font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--rule);">
+                        Maltepe Şubesi</div>
                 </div>
             </div>
         </div>
@@ -2285,20 +2609,29 @@
 
     <!-- ══ S10 TEŞEKKÜRLER ══ -->
     <section class="slide" id="s10">
-        <div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div class="slide-inner"
+            style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
             <div class="slide-num" style="justify-content:center">10 — Son</div>
             <div class="rule center"></div>
-            <h2 class="reveal" style="font-family:var(--serif);font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;letter-spacing:-.03em;line-height:1.1;margin-top:1rem;">
+            <h2 class="reveal"
+                style="font-family:var(--serif);font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;letter-spacing:-.03em;line-height:1.1;margin-top:1rem;">
                 Teşekkürler
             </h2>
-            <p class="reveal" style="font-size:.95rem;color:var(--muted);margin-top:1.5rem;line-height:1.8;max-width:520px;">
+            <p class="reveal"
+                style="font-size:.95rem;color:var(--muted);margin-top:1.5rem;line-height:1.8;max-width:520px;">
                 Üniversite Yaşam İşletim Sistemi — Kaşif İnovasyon Kampı 2026
             </p>
-            <div class="reveal" style="margin-top:3rem;display:flex;align-items:center;gap:1rem;padding:1.2rem 2rem;border:1px solid rgba(22,160,134,.2);border-radius:6px;background:rgba(22,160,134,.04);">
-                <div style="width:40px;height:40px;background:var(--kt);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:700;font-size:.72rem;color:#fff;flex-shrink:0;">KT</div>
+            <div class="reveal"
+                style="margin-top:3rem;display:flex;align-items:center;gap:1rem;padding:1.2rem 2rem;border:1px solid rgba(22,160,134,.2);border-radius:6px;background:rgba(22,160,134,.04);">
+                <div
+                    style="width:40px;height:40px;background:var(--kt);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:700;font-size:.72rem;color:#fff;flex-shrink:0;">
+                    KT</div>
                 <div style="text-align:left;">
-                    <div style="font-size:.82rem;font-weight:500;color:var(--cream);">Kuveyt Türk Kaşif İnovasyon Kampı</div>
-                    <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--kt);text-transform:uppercase;margin-top:.2rem;">ÖNCÜ EKİBİ &nbsp;·&nbsp; 2026</div>
+                    <div style="font-size:.82rem;font-weight:500;color:var(--cream);">Kuveyt Türk Kaşif İnovasyon Kampı
+                    </div>
+                    <div
+                        style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--kt);text-transform:uppercase;margin-top:.2rem;">
+                        ÖNCÜ EKİBİ &nbsp;·&nbsp; 2026</div>
                 </div>
             </div>
         </div>
